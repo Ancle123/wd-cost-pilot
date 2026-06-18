@@ -1151,6 +1151,11 @@ document.addEventListener('input',function(e){
 <button class="rte-btn" id="rteStrike" title="删除线" style="text-decoration:line-through">S</button>
 </div>
 <div class="rte-group">
+<button class="rte-btn" id="rteAlignLeft" title="左对齐" style="font-size:14px">⬅</button>
+<button class="rte-btn" id="rteAlignCenter" title="居中对齐" style="font-size:14px">⬌</button>
+<button class="rte-btn" id="rteAlignRight" title="右对齐" style="font-size:14px">➡</button>
+</div>
+<div class="rte-group">
 <input type="color" class="rte-color" id="rteColor" title="文字颜色" value="#2d3748">
 <input type="color" class="rte-color" id="rteBgColor" title="背景颜色" value="#ebf8ff">
 </div>
@@ -1271,6 +1276,9 @@ document.addEventListener('input',function(e){
   document.getElementById('rteItalic').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('italic');triggerSave()});
   document.getElementById('rteUnderline').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('underline');triggerSave()});
   document.getElementById('rteStrike').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('strikeThrough');triggerSave()});
+  document.getElementById('rteAlignLeft').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('justifyLeft');triggerSave()});
+  document.getElementById('rteAlignCenter').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('justifyCenter');triggerSave()});
+  document.getElementById('rteAlignRight').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('justifyRight');triggerSave()});
   document.getElementById('rteColor').addEventListener('mousedown',function(e){suppressHide=true});
   document.getElementById('rteColor').addEventListener('change',function(e){applyColor('color',e.target.value);suppressHide=false});
   document.getElementById('rteBgColor').addEventListener('mousedown',function(e){suppressHide=true});
