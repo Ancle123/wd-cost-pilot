@@ -197,6 +197,15 @@ tr:hover td{background:var(--blue-lt)}
 .calc-card.c{background:var(--orange-lt);border:1px solid #feebc8}
 .calc-card h4{font-size:12px;font-weight:700;margin-bottom:5px}
 .calc-card p{font-size:11px;color:var(--g600);line-height:1.6}
+
+/* Editable elements */
+[contenteditable="true"]{cursor:text;transition:background .15s;border-radius:4px}
+[contenteditable="true"]:hover{background:rgba(66,153,225,.06)}
+[contenteditable="true"]:focus{outline:2px solid var(--blue);outline-offset:2px;background:rgba(66,153,225,.08)}
+.card-header[contenteditable="true"]:hover,.section-title[contenteditable="true"]:hover,.section-subtitle[contenteditable="true"]:hover{background:rgba(66,153,225,.06)}
+.edit-banner{position:fixed;bottom:20px;right:20px;z-index:9999;padding:10px 20px;border-radius:20px;background:rgba(56,161,105,.92);color:#fff;font-size:13px;font-weight:600;opacity:0;transition:opacity .4s;pointer-events:none;box-shadow:0 2px 12px rgba(56,161,105,.3)}
+.edit-tip{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--blue);background:var(--blue-lt);padding:4px 12px;border-radius:12px;margin-bottom:8px;border:1px solid #bee3f8}
+
 @media(max-width:768px){.sidebar{width:160px}.main{margin-left:160px}.value-grid,.hub-grid,.accept-grid,.hc-overview,.adv-grid,.review-compare,.duty-lvl,.calc-solution{grid-template-columns:1fr}.hc-tree-row{grid-template-columns:1fr}.timeline{flex-direction:column}.timeline::before{display:none}.hero h1{font-size:18px}.container{padding:0 16px}}@media(max-width:480px){.sidebar{width:140px}.main{margin-left:140px}.sidebar-nav a{font-size:11px;padding:8px 12px}}
 </style>
 </head>
@@ -224,8 +233,8 @@ tr:hover td{background:var(--blue-lt)}
 <div class="main">
 
 <div class="hero">
-<h1>东区成本管理组织架构属地化试点方案</h1>
-<p>以工作方式调整为前提 以创造价值为核心逻辑 2026年6月17日</p>
+<h1 contenteditable="true">东区成本管理组织架构属地化试点方案</h1>
+<p contenteditable="true">以工作方式调整为前提 以创造价值为核心逻辑 2026年6月17日</p>
 <div class="hero-tags">
 <span class="hero-tag">中台30人</span>
 <span class="hero-tag">7城属地14人</span>
@@ -239,15 +248,17 @@ tr:hover td{background:var(--blue-lt)}
 
 <div class="confidential">
 <div class="confidential-icon">🔒</div>
-<div class="confidential-text"><strong>保密事项：</strong>本方案为东区内部试点方案，调整过程需保密，避免引起员工恐慌。节后与涂峰总对接前不得外传。</div>
+<div class="confidential-text" contenteditable="true"><strong>保密事项：</strong>本方案为东区内部试点方案，调整过程需保密，避免引起员工恐慌。节后与涂峰总对接前不得外传。</div>
 </div>
+
+<div class="edit-tip">💡 页面文字均可点击编辑，修改后自动保存到浏览器</div>
 
 <!-- S0 -->
 <div class="section" id="sec0">
-<div class="section-header"><div class="section-num">0</div><div><div class="section-title">方案概述</div><div class="section-subtitle">定位转变 逻辑链 编制总览</div></div></div>
+<div class="section-header"><div class="section-num">0</div><div><div class="section-title" contenteditable="true">方案概述</div><div class="section-subtitle" contenteditable="true">定位转变 逻辑链 编制总览</div></div></div>
 
 <div class="card" style="border-left:4px solid var(--purple)">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div style="font-weight:700;font-size:14px;color:var(--purple);margin-bottom:8px">核心定位转变</div>
 <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
 <div style="background:var(--g100);border-radius:8px;padding:8px 14px;font-size:13px;text-decoration:line-through;color:var(--g600)">服务业务部门</div>
@@ -259,8 +270,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">涂峰总核心逻辑链</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">涂峰总核心逻辑链</div>
+<div class="card-body" contenteditable="true">
 <div class="logic-chain">
 <div class="logic-step"><div class="logic-circle" style="background:var(--purple)">1</div><div class="logic-title">创造价值</div><div class="logic-desc">成本管理创造什么价值</div></div>
 <div class="logic-step"><div class="logic-circle" style="background:var(--navy-lt)">2</div><div class="logic-title">工作与价值关系</div><div class="logic-desc">每项工作如何创造价值</div></div>
@@ -273,8 +284,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">东区成本条线编制总览</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">东区成本条线编制总览</div>
+<div class="card-body" contenteditable="true">
 <div class="hc-tree">
 <div class="hc-tree-top">
 <div class="hc-num">30人</div>
@@ -300,7 +311,7 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 </div>
 </div>
-<div class="summary-box" style="background:var(--blue-lt)">
+<div class="summary-box" contenteditable="true"" style="background:var(--blue-lt)">
 <strong>编制结构：</strong>东区成本中台30人，分两条线——属地配置14人（7城成本组长7人+验收结算组7人，下沉城市公司），集中办公16人（测算核价组8人+采购与供方管理组8人，聚集大区本部）。全部30人含在编制内整体分配。<br>
 <strong>方案范围：</strong>仅涉及东区成本中台30人的组织架构调整，不含总部COE及四大区成本BP。<br>
 <strong>优先建设：</strong>价格库（核价提效）+ 大区供方库（供方管理基础）。<br>
@@ -312,7 +323,7 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S1 -->
 <div class="section" id="sec1">
-<div class="section-header"><div class="section-num">1</div><div><div class="section-title">三件核心工作的价值定位</div><div class="section-subtitle">按涂峰总要求：以创造价值大小排序</div></div></div>
+<div class="section-header"><div class="section-num">1</div><div><div class="section-title" contenteditable="true">三件核心工作的价值定位</div><div class="section-subtitle" contenteditable="true">按涂峰总要求：以创造价值大小排序</div></div></div>
 
 <div class="value-grid">
 <div class="value-card core">
@@ -357,7 +368,7 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card" style="border-left:4px solid var(--orange)">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div style="font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px">涂峰总明确指出的当前问题</div>
 <div style="font-size:12px;color:var(--g700);line-height:1.9">
 - <strong>测算精力投入过大：</strong>上海吴中路项目测算已第12版，被动配合资方要求不断调整<br>
@@ -372,11 +383,11 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S2 -->
 <div class="section" id="sec2">
-<div class="section-header"><div class="section-num">2</div><div><div class="section-title">三件核心工作方式调整</div><div class="section-subtitle">先明确工作方式和流程标准，再匹配组织架构</div></div></div>
+<div class="section-header"><div class="section-num">2</div><div><div class="section-title" contenteditable="true">三件核心工作方式调整</div><div class="section-subtitle" contenteditable="true">先明确工作方式和流程标准，再匹配组织架构</div></div></div>
 
 <div class="card">
-<div class="card-header">1. 采购管理 + 供方管理（价值创造核心）</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">1. 采购管理 + 供方管理（价值创造核心）</div>
+<div class="card-body" contenteditable="true">
 <table>
 <thead><tr><th>调整项</th><th>当前做法</th><th>调整后做法</th><th>价值</th></tr></thead>
 <tbody>
@@ -390,8 +401,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">2. 验收和核价（价值保障）</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">2. 验收和核价（价值保障）</div>
+<div class="card-body" contenteditable="true">
 <table>
 <thead><tr><th>调整项</th><th>当前做法</th><th>调整后做法</th><th>价值</th></tr></thead>
 <tbody>
@@ -404,8 +415,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">3. 交付后验收结算（价值闭环）</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">3. 交付后验收结算（价值闭环）</div>
+<div class="card-body" contenteditable="true">
 <table>
 <thead><tr><th>调整项</th><th>当前做法</th><th>调整后做法</th><th>价值</th></tr></thead>
 <tbody>
@@ -420,10 +431,10 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S3: Duty mapping -->
 <div class="section" id="sec3">
-<div class="section-header"><div class="section-num">3</div><div><div class="section-title">职责梳理：单店 / 城市公司 / 大区三级</div><div class="section-subtitle">理清每个层级当前在做什么，属地化后该做什么</div></div></div>
+<div class="section-header"><div class="section-num">3</div><div><div class="section-title" contenteditable="true">职责梳理：单店 / 城市公司 / 大区三级</div><div class="section-subtitle" contenteditable="true">理清每个层级当前在做什么，属地化后该做什么</div></div></div>
 
 <div class="card" style="border-left:4px solid var(--navy)">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div style="font-weight:700;font-size:14px;color:var(--navy);margin-bottom:6px">合同全周期寿命管理（领导认同）</div>
 <div style="font-size:12px;color:var(--g700);line-height:1.8;margin-bottom:10px">涂峰总认同合同全周期寿命管理理念，以下职责梳理按合同生命周期展开：从需求发起 -> 招采规划 -> 供方选择 -> 合同签订 -> 履约监督 -> 验收结算 -> 数据反馈。</div>
 <div class="clm-bar">
@@ -481,7 +492,7 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card" style="border-left:4px solid var(--orange)">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div style="font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px">测算现场勘察的属地化解决方案</div>
 <div style="font-size:12px;color:var(--g700);line-height:1.8;margin-bottom:12px">当前测算需要到现场勘察实际情况，但小中台化后无法每个项目都派人去现场。解决方案：按项目复杂度分级处理。</div>
 <div class="calc-solution">
@@ -505,11 +516,11 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S4 -->
 <div class="section" id="sec4">
-<div class="section-header"><div class="section-num">4</div><div><div class="section-title">工作排布：属地 vs 大区</div><div class="section-subtitle">按工作方式匹配，确定哪些工作在属地、哪些在大区</div></div></div>
+<div class="section-header"><div class="section-num">4</div><div><div class="section-title" contenteditable="true">工作排布：属地 vs 大区</div><div class="section-subtitle" contenteditable="true">按工作方式匹配，确定哪些工作在属地、哪些在大区</div></div></div>
 
 <div class="card">
-<div class="card-header">工作归属矩阵</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">工作归属矩阵</div>
+<div class="card-body" contenteditable="true">
 <table>
 <thead><tr><th>核心工作</th><th>属地（城市公司2人）</th><th>大区小中台（16人）</th></tr></thead>
 <tbody>
@@ -549,10 +560,10 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S5 -->
 <div class="section" id="sec5">
-<div class="section-header"><div class="section-num">5</div><div><div class="section-title">东区试点组织架构</div><div class="section-subtitle">工作方式确定后匹配的组织架构设计</div></div></div>
+<div class="section-header"><div class="section-num">5</div><div><div class="section-title" contenteditable="true">东区试点组织架构</div><div class="section-subtitle" contenteditable="true">工作方式确定后匹配的组织架构设计</div></div></div>
 
 <div class="card">
-<div class="card-header">架构图</div>
+<div class="card-header" contenteditable="true">架构图</div>
 <div class="arch-diagram">
 <div class="arch-layer arch-layer-hub">
 <div class="arch-layer-label">大区小中台（16人 2组）<span class="arch-count">16人</span></div>
@@ -573,7 +584,7 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card" style="border-left:4px solid var(--navy-lt)">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:6px">架构设计核心逻辑</div>
 <div style="font-size:12px;color:var(--g700);line-height:1.9">
 - <strong>验收属地化：</strong>涂峰总指出今年因放弃验收导致供方以次充好，验收专员常驻城市直接解决<br>
@@ -589,7 +600,7 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S6 -->
 <div class="section" id="sec6">
-<div class="section-header"><div class="section-num">6</div><div><div class="section-title">属地配置：7城人员部署</div><div class="section-subtitle">每城2人：成本组长 + 验收专员</div></div></div>
+<div class="section-header"><div class="section-num">6</div><div><div class="section-title" contenteditable="true">属地配置：7城人员部署</div><div class="section-subtitle" contenteditable="true">每城2人：成本组长 + 验收专员</div></div></div>
 
 <div class="city-grid">
 <div class="city-card sh"><div class="city-name">上海</div><div class="city-leader">组长：刘丽</div><div class="city-roles"><span>成本组长 供方履约监督/结算初验/现场勘察</span><span>验收专员 现场验收/质量监督</span></div></div>
@@ -602,7 +613,7 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">属地岗位职责</div>
+<div class="card-header" contenteditable="true">属地岗位职责</div>
 <div class="card-body" style="padding:0;overflow-x:auto">
 <table>
 <thead><tr><th>岗位</th><th>编制</th><th>核心职责</th><th>汇报关系</th><th>关键考核</th></tr></thead>
@@ -628,7 +639,7 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S7 -->
 <div class="section" id="sec7">
-<div class="section-header"><div class="section-num">7</div><div><div class="section-title">大区小中台：两组架构</div><div class="section-subtitle">30人 - 14人属地 = 16人大区小中台</div></div></div>
+<div class="section-header"><div class="section-num">7</div><div><div class="section-title" contenteditable="true">大区小中台：两组架构</div><div class="section-subtitle" contenteditable="true">30人 - 14人属地 = 16人大区小中台</div></div></div>
 
 <div class="hub-grid">
 <div class="hub-card calc">
@@ -667,7 +678,7 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">小中台岗位设计</div>
+<div class="card-header" contenteditable="true">小中台岗位设计</div>
 <div class="card-body" style="padding:0;overflow-x:auto">
 <table>
 <thead><tr><th>组别</th><th>岗位</th><th>编制</th><th>核心职责</th><th>价值创造点</th></tr></thead>
@@ -685,10 +696,10 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S8: Price Library + Supplier Library -->
 <div class="section" id="sec8">
-<div class="section-header"><div class="section-num">8</div><div><div class="section-title">价格库与供方库：两项优先建设</div><div class="section-subtitle">解决核价工作量过大 + 供方管理失控的基础设施</div></div></div>
+<div class="section-header"><div class="section-num">8</div><div><div class="section-title" contenteditable="true">价格库与供方库：两项优先建设</div><div class="section-subtitle" contenteditable="true">解决核价工作量过大 + 供方管理失控的基础设施</div></div></div>
 
 <div class="card" style="border-left:4px solid var(--red)">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div style="font-weight:700;font-size:14px;color:var(--red);margin-bottom:6px">为什么优先建？</div>
 <div style="font-size:12px;color:var(--g700);line-height:1.9">
 人员已减少几个，核价工作量却非常大。如果不建价格库，每个人还是从零开始核每一项价格，中台16人根本扛不住。价格库建成后，库内项目自动通过，核价人力聚焦在库外项目和新材料新工艺上，才能在人手减少的情况下维持核价质量。
@@ -697,8 +708,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">1. 价格库建设方案</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">1. 价格库建设方案</div>
+<div class="card-body" contenteditable="true">
 <div class="lib-flow">
 <div class="lib-step now">阶段一：核心品类价格库<br>（保洁/绿化/石材/维保等高频品类）</div>
 <div class="lib-arrow">-></div>
@@ -722,8 +733,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">2. 大区供方库建设方案</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">2. 大区供方库建设方案</div>
+<div class="card-body" contenteditable="true">
 <div class="lib-flow">
 <div class="lib-step now">阶段一：核心品类供方库<br>（维保/保洁/绿化等在用供方梳理）</div>
 <div class="lib-arrow">-></div>
@@ -744,7 +755,7 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">供方分层管理策略</div>
+<div class="card-header" contenteditable="true">供方分层管理策略</div>
 <div class="card-body" style="padding:0;overflow-x:auto">
 <table>
 <thead><tr><th>供方类型</th><th>管理策略</th><th>原因分析</th><th>采购方式</th><th>管理主体</th></tr></thead>
@@ -758,8 +769,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">验收分级标准</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">验收分级标准</div>
+<div class="card-body" contenteditable="true">
 <div class="accept-grid">
 <div class="accept-card t1">
 <div class="accept-tier">T1 必须验收</div>
@@ -783,10 +794,10 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S9: Review workflow -->
 <div class="section" id="sec9">
-<div class="section-header"><div class="section-num">9</div><div><div class="section-title">审核流程设计：属地2人后的管理难点</div><div class="section-subtitle">核心问题：城市公司只剩2人，审核工作怎么组织？</div></div></div>
+<div class="section-header"><div class="section-num">9</div><div><div class="section-title" contenteditable="true">审核流程设计：属地2人后的管理难点</div><div class="section-subtitle" contenteditable="true">核心问题：城市公司只剩2人，审核工作怎么组织？</div></div></div>
 
 <div class="card" style="border-left:4px solid var(--orange)">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div style="font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px">管理难点分析</div>
 <div style="font-size:12px;color:var(--g700);line-height:1.9">
 当前每个城市公司有组长+若干下属，组长让下属复核后再上报。小中台化后城市公司只剩2人，验收专员聚焦现场验收，组长一个人扛属地所有成本审核+对接+结算初验。如果大区小中台还要按城市维度逐个审核属地提交的作业，工作量确实非常大。<br><br>
@@ -796,8 +807,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">解决方案：按业务类型审核，非按城市审核</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">解决方案：按业务类型审核，非按城市审核</div>
+<div class="card-body" contenteditable="true">
 <div class="review-compare">
 <div class="review-col before">
 <h5>属地化前（按城市审核）</h5>
@@ -830,8 +841,8 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card">
-<div class="card-header">三级审核流程</div>
-<div class="card-body">
+<div class="card-header" contenteditable="true">三级审核流程</div>
+<div class="card-body" contenteditable="true">
 <div class="flow-container">
 <div class="flow-step" style="border-left:3px solid var(--green)"><div class="flow-step-title">属地初筛</div><div class="flow-step-body">7城成本组长<br>资料完整性检查<br>分类推送至对应组</div></div>
 <div class="flow-arrow">-></div>
@@ -847,7 +858,7 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S10: Advantages & Risks -->
 <div class="section" id="sec10">
-<div class="section-header"><div class="section-num">10</div><div><div class="section-title">优势与风险</div><div class="section-subtitle">全面评估试点利弊</div></div></div>
+<div class="section-header"><div class="section-num">10</div><div><div class="section-title" contenteditable="true">优势与风险</div><div class="section-subtitle" contenteditable="true">全面评估试点利弊</div></div></div>
 
 <div class="adv-grid">
 <div class="adv-card pro">
@@ -918,10 +929,10 @@ tr:hover td{background:var(--blue-lt)}
 
 <!-- S11: Timeline -->
 <div class="section" id="sec11">
-<div class="section-header"><div class="section-num">11</div><div><div class="section-title">试点推进路径</div><div class="section-subtitle">节后与涂峰总对接 保密推进</div></div></div>
+<div class="section-header"><div class="section-num">11</div><div><div class="section-title" contenteditable="true">试点推进路径</div><div class="section-subtitle" contenteditable="true">节后与涂峰总对接 保密推进</div></div></div>
 
 <div class="card">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div class="timeline">
 <div class="timeline-phase timeline-phase-1">
 <div class="timeline-dot">P1</div>
@@ -972,7 +983,7 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <div class="card" style="border-left:4px solid var(--navy)">
-<div class="card-body">
+<div class="card-body" contenteditable="true">
 <div style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:6px">涂峰总布置的待办事项</div>
 <div style="font-size:12px;color:var(--g700);line-height:2">
 <strong>1. 架构调整思考（涂登芦负责）：</strong>按创造价值、工作与价值关系、工作排布、岗位设计的逻辑，重新整理测算核价、采购管理和验收结算工作方向，节后与涂峰总核对<br>
@@ -1005,5 +1016,65 @@ var mainEl=document.querySelector('.main');
 window.addEventListener('scroll',function(){var c='';secs.forEach(function(s){if(pageYOffset>=s.offsetTop-70)c=s.id});nls.forEach(function(l){l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});
 nls.forEach(function(l){l.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(l.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
 </script>
+
+<script>
+// ===== AUTO SAVE / RESTORE (localStorage) =====
+const SAVE_KEY = 'wd_cost_pilot_v1';
+let saveTimer = null;
+
+function collectEdits() {
+  const edits = {};
+  document.querySelectorAll('[contenteditable="true"]').forEach((el, i) => {
+    edits['ce_' + i] = el.innerHTML;
+  });
+  return edits;
+}
+
+function applyEdits(edits) {
+  if (!edits) return;
+  document.querySelectorAll('[contenteditable="true"]').forEach((el, i) => {
+    if (edits['ce_' + i] !== undefined) el.innerHTML = edits['ce_' + i];
+  });
+}
+
+function autoSave() {
+  try {
+    const edits = collectEdits();
+    localStorage.setItem(SAVE_KEY, JSON.stringify(edits));
+    const indicator = document.getElementById('saveIndicator');
+    if (indicator) {
+      indicator.style.opacity = '1';
+      setTimeout(() => { indicator.style.opacity = '0'; }, 1500);
+    }
+  } catch(e) {}
+}
+
+function loadSaved() {
+  try {
+    const saved = localStorage.getItem(SAVE_KEY);
+    if (saved) {
+      applyEdits(JSON.parse(saved));
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+// Listen for edits and debounce save
+document.addEventListener('input', function(e) {
+  if (e.target.closest('[contenteditable]') || e.target.hasAttribute('contenteditable')) {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(autoSave, 800);
+  }
+});
+
+// Restore saved edits after page load
+window.addEventListener('load', function() {
+  loadSaved();
+});
+</script>
+
+<div id="saveIndicator" class="edit-banner">✅ 已自动保存</div>
+
 </body>
 </html>
