@@ -198,6 +198,55 @@ tr:hover td{background:var(--blue-lt)}
 .calc-card h4{font-size:12px;font-weight:700;margin-bottom:5px}
 .calc-card p{font-size:11px;color:var(--g600);line-height:1.6}
 
+
+/* Resizable boxes */
+.card,.hc-tree-top,.hc-tree-branch,.hc-tree-leaf,.summary-box,.accept-card,.adv-card,.calc-card,.timeline-content,.logic-step,.arch-node,.confidential,.flow-step,.risk-card,.city-card,.duty-card,.work-col-hub,.work-col-local,.value-card,.hub-card{resize:both;overflow:auto;min-width:80px;min-height:40px}
+
+/* Resize handle styling */
+.card::-webkit-resizer,.hc-tree-branch::-webkit-resizer,.hc-tree-leaf::-webkit-resizer,.summary-box::-webkit-resizer,.accept-card::-webkit-resizer,.adv-card::-webkit-resizer,.calc-card::-webkit-resizer,.timeline-content::-webkit-resizer,.arch-node::-webkit-resizer,.flow-step::-webkit-resizer,.risk-card::-webkit-resizer,.city-card::-webkit-resizer,.duty-card::-webkit-resizer,.work-col-hub::-webkit-resizer,.work-col-local::-webkit-resizer,.value-card::-webkit-resizer,.hub-card::-webkit-resizer{background:linear-gradient(135deg,transparent 50%,rgba(66,153,225,.4) 50%);width:14px;height:14px}
+
+
+
+
+/* Rich Text Editor Toolbar */
+.rte-toolbar{position:fixed;z-index:10001;display:none;background:#fff;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.2);padding:4px;border:1px solid var(--g200);flex-wrap:wrap;max-width:360px;cursor:move;user-select:none}.rte-toolbar.show{display:flex}.rte-toolbar.dragging{cursor:grabbing;box-shadow:0 8px 30px rgba(0,0,0,.3)}.rte-toolbar .rte-btn,.rte-toolbar .rte-color,.rte-toolbar .rte-size,.rte-toolbar .rte-label{cursor:pointer;user-select:none}.rte-toolbar .rte-btn{cursor:pointer}.rte-handle{display:flex;align-items:center;padding:0 6px 0 4px;cursor:grab;color:var(--g400);font-size:12px}.rte-handle:active{cursor:grabbing}
+.rte-toolbar.show{display:flex}
+.rte-group{display:flex;align-items:center;gap:1px;padding:0 3px;border-right:1px solid var(--g200)}
+.rte-group:last-child{border-right:none}
+.rte-btn{width:30px;height:30px;border:none;background:transparent;border-radius:6px;cursor:pointer;font-size:13px;font-weight:700;color:var(--g700);transition:all .12s;display:flex;align-items:center;justify-content:center;user-select:none}
+.rte-btn:hover{background:var(--blue);color:#fff}
+.rte-btn.active{background:var(--blue);color:#fff}
+.rte-size{min-width:46px;text-align:center;font-size:12px;font-weight:700;color:var(--g800);user-select:none;padding:0 2px}
+.rte-color{width:28px;height:28px;border:none;border-radius:6px;cursor:pointer;padding:2px}
+.rte-label{font-size:9px;color:var(--g400);padding:0 4px;user-select:none;line-height:1}
+.rte-del{background:transparent;color:var(--red);font-size:11px;width:auto;padding:0 8px}
+.rte-del:hover{background:var(--red);color:#fff}
+.rte-add{background:transparent;color:var(--green);font-size:11px;width:auto;padding:0 8px}
+.rte-add:hover{background:var(--green);color:#fff}
+/* Make all text elements editable */
+[contenteditable="true"],[contenteditable]{
+  cursor:text;
+  border-radius:4px;
+  transition:background .12s;
+  position:relative;
+}
+[contenteditable="true"]:hover{
+  background:rgba(66,153,225,.05);
+  outline:1px dashed rgba(66,153,225,.3);
+}
+[contenteditable="true"]:focus{
+  outline:2px solid var(--blue);
+  outline-offset:1px;
+  background:rgba(66,153,225,.03);
+}
+/* Delete button on boxes */
+.box-actions{position:absolute;top:-12px;right:8px;display:none;z-index:5}
+.card:hover .box-actions,.hc-tree-branch:hover .box-actions,.hc-tree-leaf:hover .box-actions,.summary-box:hover .box-actions,.accept-card:hover .box-actions,.adv-card:hover .box-actions,.calc-card:hover .box-actions,.timeline-content:hover .box-actions,.logic-step:hover .box-actions,.arch-node:hover .box-actions,.flow-step:hover .box-actions,.risk-card:hover .box-actions,.city-card:hover .box-actions,.duty-card:hover .box-actions,.value-card:hover .box-actions,.hub-card:hover .box-actions,.confidential:hover .box-actions{display:flex}
+.box-del{background:var(--red);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(229,62,62,.4)}
+.box-del:hover{background:#c53030}
+.box-add{background:var(--green);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:14px;line-height:1;margin-left:4px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(56,161,105,.4)}
+.box-add:hover{background:#2f855a}
+
 /* Editable elements */
 [contenteditable="true"]{cursor:text;transition:background .15s;border-radius:4px}
 [contenteditable="true"]:hover{background:rgba(66,153,225,.06)}
@@ -251,7 +300,7 @@ tr:hover td{background:var(--blue-lt)}
 <div class="confidential-text" contenteditable="true"><strong>保密事项：</strong>本方案为东区内部试点方案，调整过程需保密，避免引起员工恐慌。节后与涂峰总对接前不得外传。</div>
 </div>
 
-<div class="edit-tip">💡 页面文字均可点击编辑，修改后自动保存到浏览器</div>
+<div style="display:inline-flex;align-items:center;gap:8px;font-size:11px;color:var(--blue);background:var(--blue-lt);padding:6px 14px;border-radius:12px;margin-bottom:8px;border:1px solid #bee3f8">💡 点击任意文字可编辑 | 选中文字后上方工具条调整字号/颜色/加粗/删除线 | 悬停色块右上角可删除或复制新增</div>
 
 <!-- S0 -->
 <div class="section" id="sec0">
@@ -326,7 +375,7 @@ tr:hover td{background:var(--blue-lt)}
 <div class="section-header"><div class="section-num">1</div><div><div class="section-title" contenteditable="true">三件核心工作的价值定位</div><div class="section-subtitle" contenteditable="true">按涂峰总要求：以创造价值大小排序</div></div></div>
 
 <div class="value-grid">
-<div class="value-card core">
+<div class="value-card core" contenteditable="true">
 <div class="value-tag">01</div>
 <div class="value-rank">价值创造核心</div>
 <div class="value-name">采购管理 + 供方管理</div>
@@ -339,7 +388,7 @@ tr:hover td{background:var(--blue-lt)}
 - 招采规划前置，减少频繁招标
 </div>
 </div>
-<div class="value-card important">
+<div class="value-card important" contenteditable="true">
 <div class="value-tag">02</div>
 <div class="value-rank">价值保障重要</div>
 <div class="value-name">验收和核价</div>
@@ -352,7 +401,7 @@ tr:hover td{background:var(--blue-lt)}
 - 建价格库，库内项目自动通过
 </div>
 </div>
-<div class="value-card support">
+<div class="value-card support" contenteditable="true">
 <div class="value-tag">03</div>
 <div class="value-rank">价值闭环支撑</div>
 <div class="value-name">交付后验收结算</div>
@@ -1011,70 +1060,262 @@ tr:hover td{background:var(--blue-lt)}
 </div>
 
 <script>
+// Scroll nav highlight
 var secs=document.querySelectorAll('.section'),nls=document.querySelectorAll('.sidebar-nav a');
-var mainEl=document.querySelector('.main');
 window.addEventListener('scroll',function(){var c='';secs.forEach(function(s){if(pageYOffset>=s.offsetTop-70)c=s.id});nls.forEach(function(l){l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});
 nls.forEach(function(l){l.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(l.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
 </script>
 
 <script>
-// ===== AUTO SAVE / RESTORE (localStorage) =====
-const SAVE_KEY = 'wd_cost_pilot_v1';
-let saveTimer = null;
-
-function collectEdits() {
-  const edits = {};
-  document.querySelectorAll('[contenteditable="true"]').forEach((el, i) => {
-    edits['ce_' + i] = el.innerHTML;
-  });
-  return edits;
+// ===== UNIFIED SAVE / RESTORE (localStorage) =====
+var SAVE_KEY='wd_cost_pilot_v2';
+var saveTimer=null;
+function ensureEditId(el){
+  if(!el.getAttribute('data-edit-id')){
+    var sec=el.closest('.section');
+    var sid=sec?sec.id:'root';
+    var idx=0;
+    var all=sec?sec.querySelectorAll('[contenteditable="true"]'):document.querySelectorAll('[contenteditable="true"]');
+    for(var i=0;i<all.length;i++){if(all[i]===el){idx=i;break}}
+    el.setAttribute('data-edit-id',sid+'_'+idx);
+  }
+  return el.getAttribute('data-edit-id');
 }
-
-function applyEdits(edits) {
-  if (!edits) return;
-  document.querySelectorAll('[contenteditable="true"]').forEach((el, i) => {
-    if (edits['ce_' + i] !== undefined) el.innerHTML = edits['ce_' + i];
-  });
+function triggerSave(){
+  try{
+    var edits={};
+    document.querySelectorAll('[contenteditable="true"]').forEach(function(el){
+      var id=ensureEditId(el);
+      edits['ce_'+id]=el.innerHTML;
+      edits['fs_'+id]=el.style.fontSize||'';
+      edits['fc_'+id]=el.style.color||'';
+      edits['bc_'+id]=el.style.backgroundColor||'';
+    });
+    localStorage.setItem(SAVE_KEY,JSON.stringify(edits));
+    var ind=document.getElementById('saveIndicator');
+    if(ind){ind.style.opacity='1';setTimeout(function(){ind.style.opacity='0'},1500)}
+  }catch(e){}
 }
-
-function autoSave() {
-  try {
-    const edits = collectEdits();
-    localStorage.setItem(SAVE_KEY, JSON.stringify(edits));
-    const indicator = document.getElementById('saveIndicator');
-    if (indicator) {
-      indicator.style.opacity = '1';
-      setTimeout(() => { indicator.style.opacity = '0'; }, 1500);
-    }
-  } catch(e) {}
-}
-
-function loadSaved() {
-  try {
-    const saved = localStorage.getItem(SAVE_KEY);
-    if (saved) {
-      applyEdits(JSON.parse(saved));
+function loadSavedAll(){
+  try{
+    var saved=localStorage.getItem(SAVE_KEY);
+    if(saved){
+      var edits=JSON.parse(saved);
+      var allEls=document.querySelectorAll('[contenteditable="true"]');
+      allEls.forEach(function(el,i){
+        var id=ensureEditId(el);
+        var ceKey='ce_'+id;
+        if(edits[ceKey]===undefined) ceKey='ce_'+i;
+        if(edits[ceKey]!==undefined) el.innerHTML=edits[ceKey];
+        var fsKey='fs_'+id;
+        if(edits[fsKey]===undefined) fsKey='fs_'+i;
+        if(edits[fsKey]) el.style.fontSize=edits[fsKey];
+        var fcKey='fc_'+id;
+        if(edits[fcKey]===undefined) fcKey='fc_'+i;
+        if(edits[fcKey]) el.style.color=edits[fcKey];
+        var bcKey='bc_'+id;
+        if(edits[bcKey]===undefined) bcKey='bc_'+i;
+        if(edits[bcKey]) el.style.backgroundColor=edits[bcKey];
+      });
       return true;
     }
-  } catch(e) {}
+  }catch(e){}
   return false;
 }
-
-// Listen for edits and debounce save
-document.addEventListener('input', function(e) {
-  if (e.target.closest('[contenteditable]') || e.target.hasAttribute('contenteditable')) {
+document.addEventListener('input',function(e){
+  if(e.target.closest('[contenteditable]')||e.target.hasAttribute('contenteditable')){
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(autoSave, 800);
+    saveTimer=setTimeout(triggerSave,500);
   }
-});
-
-// Restore saved edits after page load
-window.addEventListener('load', function() {
-  loadSaved();
 });
 </script>
 
-<div id="saveIndicator" class="edit-banner">✅ 已自动保存</div>
+<!-- Rich Text Editor Toolbar -->
+<div id="rteToolbar" class="rte-toolbar">
+<div class="rte-handle" id="rteHandle" title="拖动工具条">⋮⋮</div>
+<div class="rte-group">
+<button class="rte-btn" id="rteFontMinus" title="缩小字号">A−</button>
+<span class="rte-size" id="rteFontSize">14</span>
+<button class="rte-btn" id="rteFontPlus" title="放大字号">A+</button>
+</div>
+<div class="rte-group">
+<button class="rte-btn" id="rteBold" title="加粗" style="font-weight:900">B</button>
+<button class="rte-btn" id="rteItalic" title="斜体" style="font-style:italic">I</button>
+<button class="rte-btn" id="rteUnderline" title="下划线" style="text-decoration:underline">U</button>
+<button class="rte-btn" id="rteStrike" title="删除线" style="text-decoration:line-through">S</button>
+</div>
+<div class="rte-group">
+<input type="color" class="rte-color" id="rteColor" title="文字颜色" value="#2d3748">
+<input type="color" class="rte-color" id="rteBgColor" title="背景颜色" value="#ebf8ff">
+</div>
+<div class="rte-group">
+<button class="rte-btn rte-del" id="rteDelete" title="删除当前内容">删除</button>
+<button class="rte-btn rte-add" id="rteDuplicate" title="复制当前块">复制</button>
+</div>
+</div>
 
+<script>
+// ===== RICH TEXT EDITOR =====
+(function(){
+  var toolbar=document.getElementById('rteToolbar');
+  var sizeLabel=document.getElementById('rteFontSize');
+  var activeEl=null;
+  var curSize=14;
+  var suppressHide=false;
+
+  function show(el){
+    activeEl=el;
+    var cs=window.getComputedStyle(el);
+    curSize=parseFloat(cs.fontSize)||14;
+    sizeLabel.textContent=Math.round(curSize);
+    var rect=el.getBoundingClientRect();
+    var top=rect.top-44;
+    if(top<5) top=rect.bottom+6;
+    var left=rect.left;
+    if(left+360>window.innerWidth) left=window.innerWidth-370;
+    if(left<5) left=5;
+    toolbar.style.top=top+'px';
+    toolbar.style.left=left+'px';
+    toolbar.classList.add('show');
+  }
+
+  // Drag toolbar
+  var isDragging=false,dragOffsetX=0,dragOffsetY=0;
+  var handle=document.getElementById('rteHandle');
+  if(handle){
+    handle.addEventListener('mousedown',function(e){
+      isDragging=true;
+      toolbar.classList.add('dragging');
+      var rect=toolbar.getBoundingClientRect();
+      dragOffsetX=e.clientX-rect.left;
+      dragOffsetY=e.clientY-rect.top;
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove',function(e){
+      if(!isDragging) return;
+      var x=e.clientX-dragOffsetX;
+      var y=e.clientY-dragOffsetY;
+      if(x<0) x=0;
+      if(y<0) y=0;
+      if(x+toolbar.offsetWidth>window.innerWidth) x=window.innerWidth-toolbar.offsetWidth;
+      if(y+toolbar.offsetHeight>window.innerHeight) y=window.innerHeight-toolbar.offsetHeight;
+      toolbar.style.left=x+'px';
+      toolbar.style.top=y+'px';
+    });
+    document.addEventListener('mouseup',function(){
+      if(isDragging){isDragging=false;toolbar.classList.remove('dragging')}
+    });
+  }
+
+  function hide(){
+    if(suppressHide) return;
+    toolbar.classList.remove('show');
+    activeEl=null;
+  }
+
+  function changeFontSize(delta){
+    if(!activeEl) return;
+    var sel=window.getSelection();
+    curSize=Math.max(8,Math.min(48,curSize+delta));
+    if(sel&&sel.rangeCount>0&&!sel.isCollapsed&&activeEl.contains(sel.anchorNode)){
+      document.execCommand('fontSize',false,'7');
+      var fonts=activeEl.querySelectorAll('font[size="7"]');
+      for(var i=0;i<fonts.length;i++){fonts[i].removeAttribute('size');fonts[i].style.fontSize=curSize+'px'}
+    }else{
+      activeEl.style.fontSize=curSize+'px';
+      var ch=activeEl.querySelectorAll('*');
+      for(var i=0;i<ch.length;i++){ch[i].style.fontSize=curSize+'px'}
+    }
+    sizeLabel.textContent=Math.round(curSize);
+    triggerSave();
+  }
+
+  function applyColor(prop,val){
+    var sel=window.getSelection();
+    if(sel&&sel.rangeCount>0&&!sel.isCollapsed&&activeEl&&activeEl.contains(sel.anchorNode)){
+      document.execCommand(prop==='color'?'foreColor':'hiliteColor',false,val);
+    }else if(activeEl){
+      activeEl.style[prop==='color'?'color':'backgroundColor']=val;
+      var ch=activeEl.querySelectorAll('*');
+      for(var i=0;i<ch.length;i++){ch[i].style[prop==='color'?'color':'backgroundColor']=val}
+    }
+    triggerSave();
+  }
+
+  function deleteContent(){
+    if(!activeEl) return;
+    if(confirm('确认清空当前区域内容？')){activeEl.innerHTML='';triggerSave()}
+  }
+
+  function duplicateBox(){
+    if(!activeEl) return;
+    var box=activeEl.closest('.card')||activeEl.closest('.hc-tree-branch')||activeEl.closest('.hc-tree-leaf')||activeEl.closest('.summary-box')||activeEl.closest('.accept-card')||activeEl.closest('.adv-card')||activeEl.closest('.calc-card')||activeEl.closest('.timeline-content')||activeEl.closest('.logic-step')||activeEl.closest('.arch-node')||activeEl.closest('.flow-step')||activeEl.closest('.risk-card')||activeEl.closest('.city-card')||activeEl.closest('.duty-card')||activeEl.closest('.value-card')||activeEl.closest('.hub-card')||activeEl;
+    if(box&&box.parentNode){
+      var clone=box.cloneNode(true);
+      var oa=clone.querySelector('.box-actions');
+      if(oa) oa.remove();
+      box.parentNode.insertBefore(clone,box.nextSibling);
+      triggerSave();
+    }
+  }
+
+  document.getElementById('rteFontMinus').addEventListener('mousedown',function(e){e.preventDefault();changeFontSize(-1)});
+  document.getElementById('rteFontPlus').addEventListener('mousedown',function(e){e.preventDefault();changeFontSize(1)});
+  document.getElementById('rteBold').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('bold');triggerSave()});
+  document.getElementById('rteItalic').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('italic');triggerSave()});
+  document.getElementById('rteUnderline').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('underline');triggerSave()});
+  document.getElementById('rteStrike').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('strikeThrough');triggerSave()});
+  document.getElementById('rteColor').addEventListener('mousedown',function(e){suppressHide=true});
+  document.getElementById('rteColor').addEventListener('change',function(e){applyColor('color',e.target.value);suppressHide=false});
+  document.getElementById('rteBgColor').addEventListener('mousedown',function(e){suppressHide=true});
+  document.getElementById('rteBgColor').addEventListener('change',function(e){applyColor('bg',e.target.value);suppressHide=false});
+  document.getElementById('rteDelete').addEventListener('mousedown',function(e){e.preventDefault();deleteContent()});
+  document.getElementById('rteDuplicate').addEventListener('mousedown',function(e){e.preventDefault();duplicateBox()});
+
+  document.addEventListener('focusin',function(e){
+    if(e.target&&e.target.hasAttribute&&e.target.hasAttribute('contenteditable')){show(e.target)}
+  });
+  document.addEventListener('focusout',function(e){
+    setTimeout(function(){
+      var ae=document.activeElement;
+      if(suppressHide) return;
+      if(!ae||!ae.closest||(!ae.closest('#rteToolbar')&&!ae.closest('.rte-color'))){hide()}
+    },200);
+  });
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[contenteditable]');
+    if(t){show(t)}
+  });
+
+  // ===== BOX DELETE / ADD =====
+  function addBoxActions(){
+    var s='.card, .hc-tree-branch, .hc-tree-leaf, .summary-box, .accept-card, .adv-card, .calc-card, .timeline-content, .logic-step, .arch-node, .flow-step, .risk-card, .city-card, .duty-card, .value-card, .hub-card';
+    document.querySelectorAll(s).forEach(function(box){
+      if(box.querySelector('.box-actions')) return;
+      var act=document.createElement('div');
+      act.className='box-actions';
+      var d=document.createElement('button');
+      d.className='box-del';d.innerHTML='×';d.title='删除此块';
+      d.addEventListener('click',function(e){e.stopPropagation();if(confirm('确认删除整个色块？')){box.remove();triggerSave()}});
+      var a=document.createElement('button');
+      a.className='box-add';a.innerHTML='+';a.title='复制并新增一块';
+      a.addEventListener('click',function(e){e.stopPropagation();var c=box.cloneNode(true);var oa=c.querySelector('.box-actions');if(oa)oa.remove();box.parentNode.insertBefore(c,box.nextSibling);triggerSave()});
+      act.appendChild(d);act.appendChild(a);
+      var cs=window.getComputedStyle(box);
+      if(cs.position==='static') box.style.position='relative';
+      box.appendChild(act);
+    });
+  }
+
+  // Init: load saved data first, then add box actions
+  window.addEventListener('load',function(){
+    localStorage.removeItem('wd_cost_pilot_v1');
+    loadSavedAll();
+    addBoxActions();
+  });
+})();
+</script>
+
+<div id="saveIndicator" class="edit-banner">✅ 已自动保存</div>
 </body>
 </html>
