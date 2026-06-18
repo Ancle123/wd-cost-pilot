@@ -1276,9 +1276,21 @@ document.addEventListener('input',function(e){
   document.getElementById('rteItalic').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('italic');triggerSave()});
   document.getElementById('rteUnderline').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('underline');triggerSave()});
   document.getElementById('rteStrike').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('strikeThrough');triggerSave()});
-  document.getElementById('rteAlignLeft').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('justifyLeft');triggerSave()});
-  document.getElementById('rteAlignCenter').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('justifyCenter');triggerSave()});
-  document.getElementById('rteAlignRight').addEventListener('mousedown',function(e){e.preventDefault();document.execCommand('justifyRight');triggerSave()});
+  function applyAlign(align){
+    if(!activeEl) return;
+    var sel=window.getSelection();
+    if(sel&&sel.rangeCount>0&&!sel.isCollapsed&&activeEl.contains(sel.anchorNode)){
+      document.execCommand(align==='left'?'justifyLeft':align==='center'?'justifyCenter':'justifyRight');
+    }else{
+      activeEl.style.textAlign=align;
+      var ch=activeEl.querySelectorAll('*');
+      for(var i=0;i<ch.length;i++){ch[i].style.textAlign=align}
+    }
+    triggerSave();
+  }
+  document.getElementById('rteAlignLeft').addEventListener('mousedown',function(e){e.preventDefault();applyAlign('left')});
+  document.getElementById('rteAlignCenter').addEventListener('mousedown',function(e){e.preventDefault();applyAlign('center')});
+  document.getElementById('rteAlignRight').addEventListener('mousedown',function(e){e.preventDefault();applyAlign('right')});
   document.getElementById('rteColor').addEventListener('mousedown',function(e){suppressHide=true});
   document.getElementById('rteColor').addEventListener('change',function(e){applyColor('color',e.target.value);suppressHide=false});
   document.getElementById('rteBgColor').addEventListener('mousedown',function(e){suppressHide=true});
