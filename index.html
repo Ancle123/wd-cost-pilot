@@ -253,6 +253,12 @@ tr:hover td{background:var(--blue-lt)}
 [contenteditable="true"]:focus{outline:2px solid var(--blue);outline-offset:2px;background:rgba(66,153,225,.08)}
 .card-header[contenteditable="true"]:hover,.section-title[contenteditable="true"]:hover,.section-subtitle[contenteditable="true"]:hover{background:rgba(66,153,225,.06)}
 .edit-banner{position:fixed;bottom:20px;right:20px;z-index:9999;padding:10px 20px;border-radius:20px;background:rgba(56,161,105,.92);color:#fff;font-size:13px;font-weight:600;opacity:0;transition:opacity .4s;pointer-events:none;box-shadow:0 2px 12px rgba(56,161,105,.3)}
+.export-bar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--g200);border-radius:24px;padding:6px 6px 6px 16px;box-shadow:0 2px 16px rgba(0,0,0,.12)}
+.export-bar-label{font-size:11px;color:var(--g600);white-space:nowrap}
+.btn-export{background:var(--navy);color:#fff;border:none;border-radius:16px;padding:7px 18px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-export:hover{background:var(--navy-lt);transform:translateY(-1px)}
+.btn-reset{background:#fff;color:var(--red);border:1px solid var(--red);border-radius:16px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-reset:hover{background:var(--red-lt)}
 .edit-tip{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--blue);background:var(--blue-lt);padding:4px 12px;border-radius:12px;margin-bottom:8px;border:1px solid #bee3f8}
 
 @media(max-width:768px){.sidebar{width:160px}.main{margin-left:160px}.value-grid,.hub-grid,.accept-grid,.hc-overview,.adv-grid,.review-compare,.duty-lvl,.calc-solution{grid-template-columns:1fr}.hc-tree-row{grid-template-columns:1fr}.timeline{flex-direction:column}.timeline::before{display:none}.hero h1{font-size:18px}.container{padding:0 16px}}@media(max-width:480px){.sidebar{width:140px}.main{margin-left:140px}.sidebar-nav a{font-size:11px;padding:8px 12px}}
@@ -1317,5 +1323,37 @@ document.addEventListener('input',function(e){
 </script>
 
 <div id="saveIndicator" class="edit-banner">✅ 已自动保存</div>
+
+<div class="export-bar">
+  <span class="export-bar-label">编辑完成后导出固化文件</span>
+  <button class="btn-export" onclick="exportHTML()">导出编辑结果</button>
+  <button class="btn-reset" onclick="resetEdits()">重置</button>
+</div>
+
+<script>
+function exportHTML(){
+  var clone=document.documentElement.cloneNode(true);
+  var ex=clone.querySelectorAll('.box-actions,.export-bar,#rteToolbar,#saveIndicator');
+  ex.forEach(function(e){e.remove()});
+  clone.querySelectorAll('[contenteditable]').forEach(function(e){e.removeAttribute('contenteditable')});
+  clone.querySelectorAll('.rte-toolbar.show').forEach(function(e){e.classList.remove('show')});
+  var html='<!DOCTYPE html>\n'+clone.outerHTML;
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='东区成本管理组织架构属地化试点方案.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+function resetEdits(){
+  if(confirm('确认清除所有编辑内容，恢复原始版本？此操作不可撤销。')){
+    localStorage.removeItem('wd_cost_pilot_v2');
+    localStorage.removeItem('wd_cost_pilot_v1');
+    location.reload();
+  }
+}
+</script>
 </body>
 </html>
