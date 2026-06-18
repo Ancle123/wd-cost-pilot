@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>东区成本管理组织架构属地化试点方案</title>
+<style>
+:root{--navy:#1a365d;--navy-lt:#2b6cb0;--blue:#4299e1;--blue-lt:#ebf8ff;--green:#38a169;--green-lt:#f0fff4;--orange:#dd6b20;--orange-lt:#fffaf0;--red:#e53e3e;--red-lt:#fff5f5;--purple:#6b46c1;--purple-lt:#faf5ff;--g50:#f7fafc;--g100:#edf2f7;--g200:#e2e8f0;--g300:#cbd5e0;--g400:#a0aec0;--g600:#718096;--g700:#4a5568;--g800:#2d3748;--sh:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);--sh2:0 4px 6px rgba(0,0,0,.1),0 2px 4px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--g800);background:var(--g50);line-height:1.7}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:200px;position:fixed;top:0;left:0;bottom:0;background:var(--navy);color:#fff;z-index:100;display:flex;flex-direction:column;box-shadow:2px 0 8px rgba(0,0,0,.1)}
+.sidebar-brand{font-weight:700;font-size:14px;padding:20px 18px 14px;border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.sidebar-brand-sub{font-size:10px;opacity:.6;margin-top:2px}
+.sidebar-nav{flex:1;overflow-y:auto;padding:10px 0}
+.sidebar-nav a{display:block;color:rgba(255,255,255,.65);text-decoration:none;font-size:12px;padding:9px 18px;transition:all .2s;border-left:3px solid transparent;line-height:1.5}
+.sidebar-nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.sidebar-nav a.active{color:#fff;background:rgba(66,153,225,.15);border-left-color:#4299e1;font-weight:600}
+.sidebar-footer{padding:12px 18px;border-top:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.4);flex-shrink:0}
+.main{flex:1;margin-left:200px;min-width:0}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy-lt));color:#fff;padding:40px 30px 28px}
+.hero h1{font-size:22px;font-weight:800;margin-bottom:6px}
+.hero p{font-size:12.5px;opacity:.75}
+.hero-tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.hero-tag{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:3px 10px;font-size:11px}
+.container{max-width:980px;margin:0 auto;padding:0 30px}
+.section{padding:32px 0}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.section-num{background:var(--navy);color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.section-title{font-size:19px;font-weight:800;color:var(--navy)}
+.section-subtitle{font-size:12px;color:var(--g600);margin-top:2px}
+.card{background:#fff;border-radius:12px;box-shadow:var(--sh);overflow:hidden;margin-bottom:16px}
+.card-header{padding:14px 20px;border-bottom:1px solid var(--g200);font-weight:700;font-size:13.5px;display:flex;align-items:center;gap:6px}
+.card-body{padding:16px 20px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:11px}
+td{padding:8px 12px;border-bottom:1px solid var(--g200);vertical-align:top}
+tr:hover td{background:var(--blue-lt)}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10.5px;font-weight:600}
+.tag-red{background:#fff5f5;color:var(--red)}
+.tag-orange{background:#fffaf0;color:var(--orange)}
+.tag-green{background:var(--green-lt);color:var(--green)}
+.tag-blue{background:var(--blue-lt);color:var(--navy-lt)}
+.tag-navy{background:var(--navy);color:#fff}
+.tag-purple{background:var(--purple-lt);color:var(--purple)}
+.badge{display:inline-flex;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:600}
+.badge-h{background:#fff5f5;color:var(--red)}
+.badge-m{background:#fffaf0;color:var(--orange)}
+.badge-l{background:var(--green-lt);color:var(--green)}
+.logic-chain{display:flex;align-items:stretch;gap:0;margin:16px 0;overflow-x:auto}
+.logic-step{flex:1;min-width:130px;text-align:center;position:relative;padding:14px 10px}
+.logic-step:not(:last-child)::after{content:'\2192';position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--g300);z-index:1}
+.logic-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:16px;margin:0 auto 8px;box-shadow:var(--sh2)}
+.logic-title{font-weight:700;font-size:12px;margin-bottom:3px}
+.logic-desc{font-size:10.5px;color:var(--g600);line-height:1.5}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.value-card{border-radius:10px;padding:16px;position:relative;overflow:hidden;color:#fff}
+.value-card.core{background:linear-gradient(135deg,var(--purple),var(--navy-lt))}
+.value-card.important{background:linear-gradient(135deg,var(--navy-lt),var(--blue))}
+.value-card.support{background:linear-gradient(135deg,var(--blue),#63b3ed)}
+.value-rank{font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.8;margin-bottom:4px}
+.value-name{font-size:15px;font-weight:800;margin-bottom:8px}
+.value-desc{font-size:11px;opacity:.9;line-height:1.7}
+.value-tag{position:absolute;top:8px;right:10px;font-size:20px;font-weight:900;opacity:.15}
+.work-col{border-radius:10px;padding:16px}
+.work-col-local{background:var(--green-lt);border:1px solid #c6f6d5}
+.work-col-hub{background:var(--blue-lt);border:1px solid #bee3f8}
+.work-col h4{font-size:13px;font-weight:700;margin-bottom:10px}
+.work-col ul{font-size:11.5px;line-height:2;padding-left:14px;color:var(--g700)}
+.arch-diagram{padding:24px 20px}
+.arch-layer{border-radius:12px;padding:18px;margin-bottom:10px;color:#fff}
+.arch-layer-hq{background:linear-gradient(135deg,#1a365d,#2a4a7f)}
+.arch-layer-hub{background:linear-gradient(135deg,#2b6cb0,#3182ce)}
+.arch-layer-local{background:linear-gradient(135deg,#38a169,#48bb78)}
+.arch-layer-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.7;margin-bottom:10px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.arch-layer-label .arch-count{font-size:14px;font-weight:800;opacity:1}
+.arch-nodes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.arch-node{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:9px;padding:10px 14px;text-align:center;min-width:120px}
+.arch-node-title{font-weight:700;font-size:12.5px;margin-bottom:2px}
+.arch-node-desc{font-size:10px;opacity:.85;line-height:1.5}
+.arch-arrow{text-align:center;padding:4px 0;font-size:16px;color:var(--g300)}
+.city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:14px 0}
+.city-card{background:#fff;border-radius:10px;padding:14px;box-shadow:var(--sh);border-top:4px solid var(--green)}
+.city-card.sh{border-top-color:var(--red)}
+.city-card.su{border-top-color:var(--orange)}
+.city-card.hf{border-top-color:var(--navy-lt)}
+.city-card.xm{border-top-color:var(--blue)}
+.city-card.hz{border-top-color:var(--purple)}
+.city-card.nb{border-top-color:var(--green)}
+.city-card.nj{border-top-color:#ed8936}
+.city-name{font-weight:800;font-size:14px;margin-bottom:4px}
+.city-leader{font-size:11.5px;color:var(--navy);font-weight:600;margin-bottom:6px}
+.city-roles{font-size:10.5px;color:var(--g600);line-height:1.7}
+.city-roles span{display:block}
+.hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.hub-card{border-radius:12px;padding:18px;color:#fff;position:relative;overflow:hidden}
+.hub-card.calc{background:linear-gradient(135deg,var(--navy),var(--navy-lt))}
+.hub-card.proc{background:linear-gradient(135deg,var(--purple),var(--navy-lt))}
+.hub-icon{font-size:28px;opacity:.2;position:absolute;top:10px;right:14px}
+.hub-title{font-size:15px;font-weight:800;margin-bottom:3px}
+.hub-subtitle{font-size:11px;opacity:.8;margin-bottom:10px}
+.hub-roles{font-size:11.5px;line-height:1.9}
+.hub-roles li{list-style:none;padding-left:14px;position:relative;margin-bottom:3px}
+.hub-roles li::before{content:'\203A';position:absolute;left:0;font-weight:700}
+.hub-count{display:inline-block;background:rgba(255,255,255,.2);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;margin-top:8px}
+.flow-container{display:flex;align-items:flex-start;gap:8px;padding:14px 0;overflow-x:auto}
+.flow-step{background:#fff;border:1px solid var(--g200);border-radius:9px;padding:12px;min-width:150px;flex-shrink:0;box-shadow:var(--sh)}
+.flow-step-title{font-weight:700;font-size:12px;color:var(--navy);margin-bottom:5px}
+.flow-step-body{font-size:11px;color:var(--g600);line-height:1.6}
+.flow-arrow{font-size:18px;color:var(--g300);flex-shrink:0;align-self:center}
+.accept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.accept-card{border-radius:10px;padding:14px;text-align:center;color:#fff}
+.accept-card.t1{background:linear-gradient(135deg,var(--red),#fc8181)}
+.accept-card.t2{background:linear-gradient(135deg,var(--orange),#f6ad55)}
+.accept-card.t3{background:linear-gradient(135deg,var(--green),#68d391)}
+.timeline{display:flex;position:relative;margin:24px 0}
+.timeline::before{content:'';position:absolute;top:20px;left:0;right:0;height:3px;background:var(--g200);z-index:0;border-radius:2px}
+.timeline-phase{flex:1;position:relative;z-index:1;padding:0 8px}
+.timeline-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:11px;margin:0 auto 12px;box-shadow:var(--sh2)}
+.timeline-phase-1 .timeline-dot{background:var(--red)}
+.timeline-phase-2 .timeline-dot{background:var(--orange)}
+.timeline-phase-3 .timeline-dot{background:var(--green)}
+.timeline-title{font-weight:700;font-size:13px;text-align:center;margin-bottom:2px}
+.timeline-sub{font-size:11px;color:var(--g600);text-align:center;margin-bottom:8px}
+.timeline-items{font-size:11.5px;line-height:1.8}
+.timeline-items li{margin-bottom:2px;list-style:none;padding-left:13px;position:relative}
+.timeline-items li::before{content:'\203A';position:absolute;left:0;font-weight:700;color:var(--navy-lt)}
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.risk-card{background:#fff;border-radius:10px;padding:14px;box-shadow:var(--sh)}
+.risk-header{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.risk-level{display:flex;gap:2px}
+.risk-dot{width:6px;height:6px;border-radius:50%;background:var(--g200)}
+.risk-dot.ah{background:var(--red)}
+.risk-dot.am{background:var(--orange)}
+.risk-dot.al{background:var(--green)}
+.risk-title{font-weight:700;font-size:12px}
+.risk-measure{font-size:11px;color:var(--g600);margin-top:5px;padding-top:5px;border-top:1px dashed var(--g200)}
+.confidential{background:linear-gradient(135deg,#1a202c,#2d3748);color:#fff;border-radius:10px;padding:14px 18px;margin:14px 0;display:flex;align-items:center;gap:10px}
+.confidential-icon{font-size:20px}
+.confidential-text{font-size:12px;line-height:1.6}
+.confidential-text strong{color:#fc8181}
+.summary-box{border-radius:10px;padding:16px;margin-top:14px;font-size:12.5px;line-height:1.8}
+.hc-tree{margin:20px 0}
+.hc-tree-top{text-align:center;border-radius:10px;padding:14px;color:#fff;background:linear-gradient(135deg,var(--purple),var(--navy-lt));font-weight:800;font-size:16px;max-width:260px;margin:0 auto}
+.hc-tree-top .hc-num{font-size:30px;font-weight:900;line-height:1}
+.hc-tree-top .hc-label{font-size:11px;opacity:.85;margin-top:3px}
+.hc-tree-connector{text-align:center;padding:6px 0;color:var(--g300);font-size:16px}
+.hc-tree-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.hc-tree-branch{border-radius:10px;padding:14px;text-align:center;color:#fff}
+.hc-tree-branch.local{background:linear-gradient(135deg,var(--green),#48bb78)}
+.hc-tree-branch.hub{background:linear-gradient(135deg,var(--navy-lt),var(--blue))}
+.hc-tree-branch-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.hc-tree-branch-sub{font-size:10px;opacity:.8;margin-bottom:10px}
+.hc-tree-leafs{display:flex;gap:8px;justify-content:center}
+.hc-tree-leaf{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:8px 12px;text-align:center;min-width:90px}
+.hc-tree-leaf-num{font-size:18px;font-weight:900;line-height:1}
+.hc-tree-leaf-label{font-size:10px;opacity:.9;margin-top:2px}
+.hc-tree-leaf-tag{font-size:9px;opacity:.7;margin-top:2px}
+.adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.adv-card{border-radius:10px;padding:16px}
+.adv-card.pro{background:var(--green-lt);border:1px solid #c6f6d5}
+.adv-card.con{background:var(--red-lt);border:1px solid #fed7d7}
+.adv-card h4{font-size:13px;font-weight:700;margin-bottom:8px}
+.adv-card ul{font-size:11.5px;line-height:2;padding-left:14px}
+.adv-card.pro ul{color:var(--green)}
+.adv-card.con ul{color:var(--red)}
+.lib-flow{display:flex;align-items:center;gap:8px;padding:12px 0;flex-wrap:wrap}
+.lib-step{border-radius:8px;padding:10px 14px;font-size:11.5px;min-width:120px;text-align:center}
+.lib-step.now{background:var(--purple);color:#fff;font-weight:700}
+.lib-step.next{background:var(--blue-lt);color:var(--navy-lt);border:1px solid var(--blue)}
+.lib-arrow{font-size:16px;color:var(--g300)}
+.review-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.review-col{border-radius:10px;padding:14px}
+.review-col.before{background:#fff5f5;border:1px solid #fed7d7}
+.review-col.after{background:var(--green-lt);border:1px solid #c6f6d5}
+.review-col h5{font-size:12px;font-weight:700;margin-bottom:6px}
+.review-col p{font-size:11.5px;line-height:1.7;color:var(--g700)}
+.duty-lvl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.duty-card{border-radius:10px;padding:16px}
+.duty-card.store{background:var(--green-lt);border:1px solid #c6f6d5}
+.duty-card.city{background:var(--blue-lt);border:1px solid #bee3f8}
+.duty-card.hub{background:var(--purple-lt);border:1px solid #e9d8fd}
+.duty-card h4{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.duty-card ul{font-size:11px;line-height:1.9;padding-left:14px;color:var(--g700)}
+.clm-bar{display:flex;align-items:center;gap:0;margin:14px 0;border-radius:10px;overflow:hidden}
+.clm-phase{flex:1;padding:14px 10px;text-align:center;color:#fff;font-size:11px}
+.clm-phase strong{display:block;font-size:13px;margin-bottom:2px}
+.clm-phase.p1{background:var(--navy)}
+.clm-phase.p2{background:var(--navy-lt)}
+.clm-phase.p3{background:var(--blue)}
+.clm-phase.p4{background:var(--green)}
+.clm-phase.p5{background:var(--orange)}
+.calc-solution{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.calc-card{border-radius:10px;padding:14px;text-align:center}
+.calc-card.a{background:var(--green-lt);border:1px solid #c6f6d5}
+.calc-card.b{background:var(--blue-lt);border:1px solid #bee3f8}
+.calc-card.c{background:var(--orange-lt);border:1px solid #feebc8}
+.calc-card h4{font-size:12px;font-weight:700;margin-bottom:5px}
+.calc-card p{font-size:11px;color:var(--g600);line-height:1.6}
+@media(max-width:768px){.sidebar{width:160px}.main{margin-left:160px}.value-grid,.hub-grid,.accept-grid,.hc-overview,.adv-grid,.review-compare,.duty-lvl,.calc-solution{grid-template-columns:1fr}.hc-tree-row{grid-template-columns:1fr}.timeline{flex-direction:column}.timeline::before{display:none}.hero h1{font-size:18px}.container{padding:0 16px}}@media(max-width:480px){.sidebar{width:140px}.main{margin-left:140px}.sidebar-nav a{font-size:11px;padding:8px 12px}}
+</style>
+</head>
+<body>
+
+<div class="layout">
+<aside class="sidebar">
+<div class="sidebar-brand">东区成本试点<div class="sidebar-brand-sub">组织架构属地化</div></div>
+<nav class="sidebar-nav">
+<a href="#sec0">方案概述</a>
+<a href="#sec1">价值定位</a>
+<a href="#sec2">工作方式调整</a>
+<a href="#sec3">职责梳理</a>
+<a href="#sec4">工作排布</a>
+<a href="#sec5">组织架构</a>
+<a href="#sec6">属地配置</a>
+<a href="#sec7">小中台</a>
+<a href="#sec8">价格库与供方库</a>
+<a href="#sec9">审核流程</a>
+<a href="#sec10">优势与风险</a>
+<a href="#sec11">推进路径</a>
+</nav>
+<div class="sidebar-footer">2026.06.17<br>内部保密</div>
+</aside>
+<div class="main">
+
+<div class="hero">
+<h1>东区成本管理组织架构属地化试点方案</h1>
+<p>以工作方式调整为前提 以创造价值为核心逻辑 2026年6月17日</p>
+<div class="hero-tags">
+<span class="hero-tag">中台30人</span>
+<span class="hero-tag">7城属地14人</span>
+<span class="hero-tag">大区小中台16人</span>
+<span class="hero-tag">价格库+供方库先行</span>
+<span class="hero-tag">合同全周期管理</span>
+</div>
+</div>
+
+<div class="container">
+
+<div class="confidential">
+<div class="confidential-icon">🔒</div>
+<div class="confidential-text"><strong>保密事项：</strong>本方案为东区内部试点方案，调整过程需保密，避免引起员工恐慌。节后与涂峰总对接前不得外传。</div>
+</div>
+
+<!-- S0 -->
+<div class="section" id="sec0">
+<div class="section-header"><div class="section-num">0</div><div><div class="section-title">方案概述</div><div class="section-subtitle">定位转变 逻辑链 编制总览</div></div></div>
+
+<div class="card" style="border-left:4px solid var(--purple)">
+<div class="card-body">
+<div style="font-weight:700;font-size:14px;color:var(--purple);margin-bottom:8px">核心定位转变</div>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<div style="background:var(--g100);border-radius:8px;padding:8px 14px;font-size:13px;text-decoration:line-through;color:var(--g600)">服务业务部门</div>
+<div style="font-size:18px;color:var(--purple);font-weight:800">-></div>
+<div style="background:var(--purple-lt);border:1px solid var(--purple);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--purple)">创造价值（运营层+经营层+组织层）</div>
+</div>
+<div style="font-size:12px;color:var(--g600);margin-top:8px">做任何事情都要考虑能否创造价值以及价值大小，以此作为判断工作的基本前提。</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">涂峰总核心逻辑链</div>
+<div class="card-body">
+<div class="logic-chain">
+<div class="logic-step"><div class="logic-circle" style="background:var(--purple)">1</div><div class="logic-title">创造价值</div><div class="logic-desc">成本管理创造什么价值</div></div>
+<div class="logic-step"><div class="logic-circle" style="background:var(--navy-lt)">2</div><div class="logic-title">工作与价值关系</div><div class="logic-desc">每项工作如何创造价值</div></div>
+<div class="logic-step"><div class="logic-circle" style="background:var(--blue)">3</div><div class="logic-title">工作排布</div><div class="logic-desc">三件事的流程和标准</div></div>
+<div class="logic-step"><div class="logic-circle" style="background:var(--green)">4</div><div class="logic-title">岗位设计</div><div class="logic-desc">需要什么岗位职责边界</div></div>
+<div class="logic-step"><div class="logic-circle" style="background:var(--orange)">5</div><div class="logic-title">组织架构</div><div class="logic-desc">架构匹配工作方式</div></div>
+</div>
+<div style="font-size:12px;color:var(--red);font-weight:600;margin-top:8px">关键原则：工作方式调整优先于组织架构调整。先想清楚三件事怎么做，再匹配架构。</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">东区成本条线编制总览</div>
+<div class="card-body">
+<div class="hc-tree">
+<div class="hc-tree-top">
+<div class="hc-num">30人</div>
+<div class="hc-label">东区成本中台</div>
+</div>
+<div class="hc-tree-connector">|</div>
+<div class="hc-tree-row">
+<div class="hc-tree-branch local">
+<div class="hc-tree-branch-title">属地配置 14人</div>
+<div class="hc-tree-branch-sub">下沉7个城市公司</div>
+<div class="hc-tree-leafs">
+<div class="hc-tree-leaf"><div class="hc-tree-leaf-num">7人</div><div class="hc-tree-leaf-label">成本组长</div><div class="hc-tree-leaf-tag">7城各1人</div></div>
+<div class="hc-tree-leaf"><div class="hc-tree-leaf-num">7人</div><div class="hc-tree-leaf-label">验收结算组</div><div class="hc-tree-leaf-tag">7城各1人</div></div>
+</div>
+</div>
+<div class="hc-tree-branch hub">
+<div class="hc-tree-branch-title">集中办公 16人</div>
+<div class="hc-tree-branch-sub">大区小中台 两组</div>
+<div class="hc-tree-leafs">
+<div class="hc-tree-leaf"><div class="hc-tree-leaf-num">8人</div><div class="hc-tree-leaf-label">测算核价组</div><div class="hc-tree-leaf-tag">集中大区</div></div>
+<div class="hc-tree-leaf"><div class="hc-tree-leaf-num">8人</div><div class="hc-tree-leaf-label">采购与供方管理组</div><div class="hc-tree-leaf-tag">集中大区</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="summary-box" style="background:var(--blue-lt)">
+<strong>编制结构：</strong>东区成本中台30人，分两条线——属地配置14人（7城成本组长7人+验收结算组7人，下沉城市公司），集中办公16人（测算核价组8人+采购与供方管理组8人，聚集大区本部）。全部30人含在编制内整体分配。<br>
+<strong>方案范围：</strong>仅涉及东区成本中台30人的组织架构调整，不含总部COE及四大区成本BP。<br>
+<strong>优先建设：</strong>价格库（核价提效）+ 大区供方库（供方管理基础）。<br>
+<strong>领导认同：</strong>合同全周期寿命管理理念。
+</div>
+</div>
+</div>
+</div>
+
+<!-- S1 -->
+<div class="section" id="sec1">
+<div class="section-header"><div class="section-num">1</div><div><div class="section-title">三件核心工作的价值定位</div><div class="section-subtitle">按涂峰总要求：以创造价值大小排序</div></div></div>
+
+<div class="value-grid">
+<div class="value-card core">
+<div class="value-tag">01</div>
+<div class="value-rank">价值创造核心</div>
+<div class="value-name">采购管理 + 供方管理</div>
+<div class="value-desc">
+创造价值最大。通过供方分层管理、招采规划、方案优化实现降本。<br><br>
+关键动作：<br>
+- 建大区供方功能库（当前缺失）<br>
+- 供方分层：保洁属地化、电梯空调全国化<br>
+- 避免主观切换供方<br>
+- 招采规划前置，减少频繁招标
+</div>
+</div>
+<div class="value-card important">
+<div class="value-tag">02</div>
+<div class="value-rank">价值保障重要</div>
+<div class="value-name">验收和核价</div>
+<div class="value-desc">
+保障价值不流失。验收是供方履约质量的最后防线，核价为业务决策提供依据。<br><br>
+关键动作：<br>
+- 验收分级：重大项目必须现场验收<br>
+- 小型项目可不验收，释放人力<br>
+- 核价聚焦辅助决策，减少非必要投入<br>
+- 建价格库，库内项目自动通过
+</div>
+</div>
+<div class="value-card support">
+<div class="value-tag">03</div>
+<div class="value-rank">价值闭环支撑</div>
+<div class="value-name">交付后验收结算</div>
+<div class="value-desc">
+完成价值闭环。结算审核确保成本准确归集，防止超付。<br><br>
+关键动作：<br>
+- 属地初验+大区终审<br>
+- 业务部门不发起则结算无法推进<br>
+- 现场发现问题可直接扣减（如吴胶厂扣20万）<br>
+- 数据反馈支撑下一轮采购决策
+</div>
+</div>
+</div>
+
+<div class="card" style="border-left:4px solid var(--orange)">
+<div class="card-body">
+<div style="font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px">涂峰总明确指出的当前问题</div>
+<div style="font-size:12px;color:var(--g700);line-height:1.9">
+- <strong>测算精力投入过大：</strong>上海吴中路项目测算已第12版，被动配合资方要求不断调整<br>
+- <strong>验收放弃影响严重：</strong>因人员减少、差旅费等原因放弃验收，导致供方以次充好（如保温层厚度问题）<br>
+- <strong>中台势能未发挥：</strong>大区成本人员精力被牵制，招采系统不稳定、无法分标段招标、缺乏供方库<br>
+- <strong>供方管理失控：</strong>供方库因安全事故等原因放弃，鱼龙混杂、挂靠现象多，成本对供方缺乏约束能力<br>
+- <strong>定位偏差：</strong>以往定位为「服务业务部门」，导致频繁招标、供方更换频繁（平均存活不超一年）
+</div>
+</div>
+</div>
+</div>
+
+<!-- S2 -->
+<div class="section" id="sec2">
+<div class="section-header"><div class="section-num">2</div><div><div class="section-title">三件核心工作方式调整</div><div class="section-subtitle">先明确工作方式和流程标准，再匹配组织架构</div></div></div>
+
+<div class="card">
+<div class="card-header">1. 采购管理 + 供方管理（价值创造核心）</div>
+<div class="card-body">
+<table>
+<thead><tr><th>调整项</th><th>当前做法</th><th>调整后做法</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>供方管理</strong></td><td>供方库废弃，鱼龙混杂，挂靠多</td><td>重建大区供方功能库，分层管理，动态评估准入退出</td><td><span class="tag tag-purple">核心</span></td></tr>
+<tr><td><strong>招采规划</strong></td><td>业务部门提议即招标，频繁更换</td><td>前置年度招采计划，按供方分层策略确定采购方式</td><td><span class="tag tag-purple">核心</span></td></tr>
+<tr><td><strong>方案优化</strong></td><td>被动接受业务方案</td><td>采购前置参与方案设计，提出成本优化建议</td><td><span class="tag tag-purple">核心</span></td></tr>
+<tr><td><strong>供方约束</strong></td><td>缺乏约束手段</td><td>建立履约评估体系（月度抽查+季度考评+年度总评），结果与续约挂钩</td><td><span class="tag tag-blue">保障</span></td></tr>
+<tr><td><strong>集采判断</strong></td><td>单一标准看集采</td><td>集采是否降本取决于采购需求和供应商市场环境，非单一标准</td><td><span class="tag tag-blue">保障</span></td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">2. 验收和核价（价值保障）</div>
+<div class="card-body">
+<table>
+<thead><tr><th>调整项</th><th>当前做法</th><th>调整后做法</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>验收执行</strong></td><td>因人员减少/差旅费放弃验收</td><td>属地验收专员常驻城市，现场验收不再受差旅费限制</td><td><span class="tag tag-red">关键</span></td></tr>
+<tr><td><strong>验收分级</strong></td><td>无差异化标准</td><td>按项目规模分级：大型施工必验收、小型可不验收</td><td><span class="tag tag-orange">提效</span></td></tr>
+<tr><td><strong>核价定位</strong></td><td>测算精力投入大（吴中路12版）</td><td>核价为辅助决策，减少非必要投入，聚焦关键项</td><td><span class="tag tag-orange">提效</span></td></tr>
+<tr><td><strong>价格库</strong></td><td>无价格基准，每项从零开始</td><td>建价格库，库内项目自动通过，聚焦库外核价</td><td><span class="tag tag-red">关键</span></td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">3. 交付后验收结算（价值闭环）</div>
+<div class="card-body">
+<table>
+<thead><tr><th>调整项</th><th>当前做法</th><th>调整后做法</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td><strong>结算发起</strong></td><td>业务部门不发起则无法推进</td><td>属地成本组长督促发起，建立结算计划台账</td><td><span class="tag tag-green">闭环</span></td></tr>
+<tr><td><strong>初验终审</strong></td><td>全部集中中台远程审核</td><td>属地初验（组长+验收专员）-> 大区终审</td><td><span class="tag tag-green">提速</span></td></tr>
+<tr><td><strong>问题处理</strong></td><td>发现问题需上报中台反馈</td><td>属地现场发现问题直接处理，扣减有据可查</td><td><span class="tag tag-green">闭环</span></td></tr>
+<tr><td><strong>数据反馈</strong></td><td>数据建设滞后</td><td>结算数据反哺供方评估库和采购决策</td><td><span class="tag tag-blue">支撑</span></td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+
+<!-- S3: Duty mapping -->
+<div class="section" id="sec3">
+<div class="section-header"><div class="section-num">3</div><div><div class="section-title">职责梳理：单店 / 城市公司 / 大区三级</div><div class="section-subtitle">理清每个层级当前在做什么，属地化后该做什么</div></div></div>
+
+<div class="card" style="border-left:4px solid var(--navy)">
+<div class="card-body">
+<div style="font-weight:700;font-size:14px;color:var(--navy);margin-bottom:6px">合同全周期寿命管理（领导认同）</div>
+<div style="font-size:12px;color:var(--g700);line-height:1.8;margin-bottom:10px">涂峰总认同合同全周期寿命管理理念，以下职责梳理按合同生命周期展开：从需求发起 -> 招采规划 -> 供方选择 -> 合同签订 -> 履约监督 -> 验收结算 -> 数据反馈。</div>
+<div class="clm-bar">
+<div class="clm-phase p1"><strong>需求发起</strong>广场端</div>
+<div class="clm-phase p2"><strong>招采规划</strong>大区</div>
+<div class="clm-phase p3"><strong>供方选择</strong>大区+属地</div>
+<div class="clm-phase p4"><strong>履约监督</strong>属地</div>
+<div class="clm-phase p5"><strong>验收结算</strong>属地+大区</div>
+</div>
+</div>
+</div>
+
+<div class="duty-lvl">
+<div class="duty-card store">
+<h4>单店（广场端）成本职责</h4>
+<ul>
+<li><strong>核价：</strong>单店日常零星核价（价格库内自动通过）</li>
+<li><strong>批流程：</strong>广场端审批流程发起与跟进</li>
+<li><strong>单店沟通：</strong>与广场各部门日常沟通协调</li>
+<li><strong>需求发起：</strong>招采计划、结算计划、验收计划发起</li>
+<li><strong>现场执行：</strong>现场施工监督、材料进场确认</li>
+<li><strong>验收确认：</strong>业务部门验收确认参与</li>
+<li><strong>数据反馈：</strong>广场端成本数据录入与反馈</li>
+<li><strong>日常对接：</strong>与城市公司成本组长日常对接</li>
+</ul>
+</div>
+<div class="duty-card city">
+<h4>城市公司成本职责</h4>
+<ul>
+<li><strong>合价测算：</strong>合价测算组织与初步审核</li>
+<li><strong>现场勘察：</strong>测算项目现场实际情况勘察</li>
+<li><strong>例会参与：</strong>城市公司各级例会（月度/周度）</li>
+<li><strong>层级对接：</strong>城市公司各层级（总经理/工程物业部/营运部）对接</li>
+<li><strong>大区汇报：</strong>向大区小中台汇报、承接大区指令</li>
+<li><strong>供方对接：</strong>属地供方日常对接与履约监督</li>
+<li><strong>结算初验：</strong>属地结算初验与资料归集</li>
+<li><strong>督促发起：</strong>督促广场端发起结算/验收</li>
+<li><strong>审批流转：</strong>属地审批权限内的变更签证审批</li>
+</ul>
+</div>
+<div class="duty-card hub">
+<h4>大区小中台职责</h4>
+<ul>
+<li><strong>测算核价组：</strong>复杂项目算量核价、单价审核</li>
+<li><strong>价格库建设：</strong>价格基准库建设与维护</li>
+<li><strong>招采规划：</strong>年度招采计划编制与组织</li>
+<li><strong>供方管理：</strong>供方功能库建设、准入评估、分层</li>
+<li><strong>集采执行：</strong>集采/区域采组织与执行</li>
+<li><strong>方案优化：</strong>采购前置参与方案设计</li>
+<li><strong>结算终审：</strong>大区层面结算终审与费用汇总</li>
+<li><strong>数据分析：</strong>成本数据归集、分析与对标</li>
+<li><strong>专业支持：</strong>对属地人员专业支持与带教</li>
+</ul>
+</div>
+</div>
+
+<div class="card" style="border-left:4px solid var(--orange)">
+<div class="card-body">
+<div style="font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px">测算现场勘察的属地化解决方案</div>
+<div style="font-size:12px;color:var(--g700);line-height:1.8;margin-bottom:12px">当前测算需要到现场勘察实际情况，但小中台化后无法每个项目都派人去现场。解决方案：按项目复杂度分级处理。</div>
+<div class="calc-solution">
+<div class="calc-card a">
+<h4>简单/标准项目</h4>
+<p>价格库内覆盖的项目<br>属地验收专员现场拍照记录<br>大区远程核价<br>无需派人到现场</p>
+</div>
+<div class="calc-card b">
+<h4>中等复杂项目</h4>
+<p>库外但有参考基准<br>属地组长现场勘察+影像<br>大区核价组远程复核<br>关键节点大区抽检</p>
+</div>
+<div class="calc-card c">
+<h4>复杂/大额项目</h4>
+<p>10万以上或无参考基准<br>大区核价组派人到现场<br>与属地组长联合勘察<br>确保测算准确性</p>
+</div>
+</div>
+<div style="font-size:11px;color:var(--g600);margin-top:8px">原则：大区核价组不再对所有项目到现场，而是聚焦复杂/大额/库外项目。简单项目由属地验收专员完成现场记录，影像资料+价格库支撑大区远程核价。这样既保证测算质量，又解决人力不足无法每项目到现场的问题。</div>
+</div>
+</div>
+</div>
+
+<!-- S4 -->
+<div class="section" id="sec4">
+<div class="section-header"><div class="section-num">4</div><div><div class="section-title">工作排布：属地 vs 大区</div><div class="section-subtitle">按工作方式匹配，确定哪些工作在属地、哪些在大区</div></div></div>
+
+<div class="card">
+<div class="card-header">工作归属矩阵</div>
+<div class="card-body">
+<table>
+<thead><tr><th>核心工作</th><th>属地（城市公司2人）</th><th>大区小中台（16人）</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>采购管理+供方管理</strong></td>
+<td>供方属地履约监督<br>日常供方对接<br>属地采购需求收集</td>
+<td><strong>采购与供方管理组（8人）</strong><br>招采规划与组织<br>供方功能库建设维护<br>供方准入评估与分层<br>集采/区域采执行<br>方案优化与成本建议</td>
+</tr>
+<tr>
+<td><strong>验收和核价</strong></td>
+<td><strong>验收专员（属地核心职责）</strong><br>现场验收执行<br>供方履约质量监督<br>隐蔽工程影像留存<br>简单项目现场勘察记录</td>
+<td><strong>测算核价组（8人）</strong><br>复杂项目算量核价<br>单价审核与市场价调研<br>清单编制与模板维护<br>价格库建设与维护<br>大额项目派人现场勘察</td>
+</tr>
+<tr>
+<td><strong>交付后验收结算</strong></td>
+<td>结算计划督促发起<br>属地初验<br>资料归集<br>现场问题处理</td>
+<td>结算终审<br>费用汇总<br>数据归集与分析</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="work-col work-col-local" style="margin-bottom:12px">
+<h4>属地核心使命（涂峰总明确）</h4>
+<ul style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px">
+<li><strong>监督供方在属地的履约情况</strong>（核心使命）</li>
+<li>供方引入前期考察、后期履约评估</li>
+<li>现场验收执行（分级标准下）</li>
+<li>响应属地城市公司和大区总裁的相关需求</li>
+<li>结算初验与资料归集</li>
+<li>属地采购需求收集与反馈</li>
+<li>简单项目现场勘察与影像记录</li>
+<li>督促广场端发起结算/验收</li>
+</ul>
+</div>
+</div>
+
+<!-- S5 -->
+<div class="section" id="sec5">
+<div class="section-header"><div class="section-num">5</div><div><div class="section-title">东区试点组织架构</div><div class="section-subtitle">工作方式确定后匹配的组织架构设计</div></div></div>
+
+<div class="card">
+<div class="card-header">架构图</div>
+<div class="arch-diagram">
+<div class="arch-layer arch-layer-hub">
+<div class="arch-layer-label">大区小中台（16人 2组）<span class="arch-count">16人</span></div>
+<div class="arch-nodes">
+<div class="arch-node"><div class="arch-node-title">测算核价组</div><div class="arch-node-desc">8人 算量核价/单价审核/价格库/结算终审</div></div>
+<div class="arch-node"><div class="arch-node-title">采购与供方管理组</div><div class="arch-node-desc">8人 招采规划/供方库/供方分层/方案优化</div></div>
+</div>
+</div>
+<div class="arch-arrow">v</div>
+<div class="arch-layer arch-layer-local">
+<div class="arch-layer-label">属地作战单元（7城x2人）<span class="arch-count">14人</span></div>
+<div class="arch-nodes">
+<div class="arch-node"><div class="arch-node-title">成本组长</div><div class="arch-node-desc">7人 供方履约监督/结算初验/属地对接/现场勘察</div></div>
+<div class="arch-node"><div class="arch-node-title">验收专员</div><div class="arch-node-desc">7人 现场验收/供方质量监督/影像记录</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card" style="border-left:4px solid var(--navy-lt)">
+<div class="card-body">
+<div style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:6px">架构设计核心逻辑</div>
+<div style="font-size:12px;color:var(--g700);line-height:1.9">
+- <strong>验收属地化：</strong>涂峰总指出今年因放弃验收导致供方以次充好，验收专员常驻城市直接解决<br>
+- <strong>小中台两组制：</strong>验收属地后剩余两项各设一组，职责清晰<br>
+- <strong>采购与供方管理组：</strong>不只是招采，还包括供方管理（准入/分层/履约评估/退出）<br>
+- <strong>测算分级勘察：</strong>大区不再每项目到现场，聚焦复杂/大额/库外项目<br>
+- <strong>合同全周期管理：</strong>从需求发起到数据反馈全链条覆盖<br>
+- <strong>复合用工：</strong>两组可跨组支援，应对业务高峰
+</div>
+</div>
+</div>
+</div>
+
+<!-- S6 -->
+<div class="section" id="sec6">
+<div class="section-header"><div class="section-num">6</div><div><div class="section-title">属地配置：7城人员部署</div><div class="section-subtitle">每城2人：成本组长 + 验收专员</div></div></div>
+
+<div class="city-grid">
+<div class="city-card sh"><div class="city-name">上海</div><div class="city-leader">组长：刘丽</div><div class="city-roles"><span>成本组长 供方履约监督/结算初验/现场勘察</span><span>验收专员 现场验收/质量监督</span></div></div>
+<div class="city-card su"><div class="city-name">苏州</div><div class="city-leader">组长：刘鹏</div><div class="city-roles"><span>成本组长 供方履约监督/结算初验/现场勘察</span><span>验收专员 现场验收/质量监督</span></div></div>
+<div class="city-card hf"><div class="city-name">合肥</div><div class="city-leader">组长：吴雪娜</div><div class="city-roles"><span>成本组长 供方履约监督/结算初验/现场勘察</span><span>验收专员 现场验收/质量监督</span></div></div>
+<div class="city-card xm"><div class="city-name">厦门</div><div class="city-leader">组长：周仁林</div><div class="city-roles"><span>成本组长 供方履约监督/结算初验/现场勘察</span><span>验收专员 现场验收/质量监督</span></div></div>
+<div class="city-card hz"><div class="city-name">杭州</div><div class="city-leader">组长：袁凯</div><div class="city-roles"><span>成本组长 供方履约监督/结算初验/现场勘察</span><span>验收专员 现场验收/质量监督</span></div></div>
+<div class="city-card nb"><div class="city-name">宁波</div><div class="city-leader">组长：郭健康</div><div class="city-roles"><span>成本组长 供方履约监督/结算初验/现场勘察</span><span>验收专员 现场验收/质量监督</span></div></div>
+<div class="city-card nj"><div class="city-name">南京</div><div class="city-leader">组长：沙爽</div><div class="city-roles"><span>成本组长 供方履约监督/结算初验/现场勘察</span><span>验收专员 现场验收/质量监督</span></div></div>
+</div>
+
+<div class="card">
+<div class="card-header">属地岗位职责</div>
+<div class="card-body" style="padding:0;overflow-x:auto">
+<table>
+<thead><tr><th>岗位</th><th>编制</th><th>核心职责</th><th>汇报关系</th><th>关键考核</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>成本组长</strong></td>
+<td>7人</td>
+<td>供方属地履约监督（引入考察+后期评估）<br>结算初验与资料归集<br>响应城市公司和大区总裁需求<br>属地采购需求收集与反馈<br>督促业务部门发起结算<br>简单/中等项目现场勘察<br>城市公司例会与层级对接<br>大区汇报与承接</td>
+<td>专业线->大区小中台两组组长<br>行政线->城市公司总经理</td>
+<td>供方履约评估完成率<br>结算时效<br>成本达成率</td>
+</tr>
+<tr>
+<td><strong>验收专员</strong></td>
+<td>7人</td>
+<td>现场验收执行（按分级标准）<br>供方履约质量监督<br>隐蔽工程影像留存<br>验收问题记录与跟踪闭环<br>简单项目现场勘察记录<br>重大问题即时上报</td>
+<td>专业线->成本组长->小中台<br>行政线->城市公司总经理</td>
+<td>验收覆盖率<br>问题发现率<br>供方质量评分</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+
+<!-- S7 -->
+<div class="section" id="sec7">
+<div class="section-header"><div class="section-num">7</div><div><div class="section-title">大区小中台：两组架构</div><div class="section-subtitle">30人 - 14人属地 = 16人大区小中台</div></div></div>
+
+<div class="hub-grid">
+<div class="hub-card calc">
+<div class="hub-icon">&#x1F4D0;</div>
+<div class="hub-title">测算核价组</div>
+<div class="hub-subtitle">价值保障 为业务决策提供专业依据</div>
+<ul class="hub-roles">
+<li>算量核价（复杂项目、大额变更）</li>
+<li>单价审核与市场价调研</li>
+<li>清单编制与标准化模板维护</li>
+<li><strong>价格库建设与维护（优先）</strong></li>
+<li>测算辅助决策（减少非必要投入）</li>
+<li>结算终审与费用汇总</li>
+<li>大额项目派人现场勘察</li>
+<li>成本数据分析与对标</li>
+<li>对属地人员专业支持与带教</li>
+</ul>
+<div class="hub-count">8人</div>
+</div>
+<div class="hub-card proc">
+<div class="hub-icon">&#x1F6D2;</div>
+<div class="hub-title">采购与供方管理组</div>
+<div class="hub-subtitle">价值创造核心 涂峰总明确的核心工作</div>
+<ul class="hub-roles">
+<li>招采规划与年度计划编制</li>
+<li><strong>供方功能库建设与维护（优先）</strong></li>
+<li>供方准入评估与分层分级</li>
+<li>集采/区域采组织与执行</li>
+<li>方案优化与成本优化建议</li>
+<li>重复招投标数据积累（涂峰总要求）</li>
+<li>供方履约评估体系运营</li>
+<li>合同全周期管理跟踪</li>
+</ul>
+<div class="hub-count">8人</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">小中台岗位设计</div>
+<div class="card-body" style="padding:0;overflow-x:auto">
+<table>
+<thead><tr><th>组别</th><th>岗位</th><th>编制</th><th>核心职责</th><th>价值创造点</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><strong>测算核价组</strong><br><span class="tag tag-blue">8人</span></td><td>组长</td><td>1人</td><td>统筹测算核价工作、价格库建设、质量把控</td><td>确保核价准确性</td></tr>
+<tr><td>核价工程师</td><td>4人</td><td>单价审核、市场价调研、清单编制、价格库录入、大额项目现场勘察</td><td>为采购决策提供依据</td></tr>
+<tr><td>结算审核工程师</td><td>3人</td><td>结算终审、费用汇总、数据分析</td><td>确保结算准确，数据反哺</td></tr>
+<tr><td rowspan="3"><strong>采购与供方管理组</strong><br><span class="tag tag-purple">8人</span></td><td>组长</td><td>1人</td><td>统筹采购与供方管理、供方库建设</td><td>采购规划创造直接降本</td></tr>
+<tr><td>采购管理岗</td><td>4人</td><td>招采规划、集采/区域采执行、方案优化</td><td>方案优化前置介入降本</td></tr>
+<tr><td>供方管理岗</td><td>3人</td><td>供方准入评估、分层管理、履约评估体系运营</td><td>供方约束力提升</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+
+<!-- S8: Price Library + Supplier Library -->
+<div class="section" id="sec8">
+<div class="section-header"><div class="section-num">8</div><div><div class="section-title">价格库与供方库：两项优先建设</div><div class="section-subtitle">解决核价工作量过大 + 供方管理失控的基础设施</div></div></div>
+
+<div class="card" style="border-left:4px solid var(--red)">
+<div class="card-body">
+<div style="font-weight:700;font-size:14px;color:var(--red);margin-bottom:6px">为什么优先建？</div>
+<div style="font-size:12px;color:var(--g700);line-height:1.9">
+人员已减少几个，核价工作量却非常大。如果不建价格库，每个人还是从零开始核每一项价格，中台16人根本扛不住。价格库建成后，库内项目自动通过，核价人力聚焦在库外项目和新材料新工艺上，才能在人手减少的情况下维持核价质量。
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">1. 价格库建设方案</div>
+<div class="card-body">
+<div class="lib-flow">
+<div class="lib-step now">阶段一：核心品类价格库<br>（保洁/绿化/石材/维保等高频品类）</div>
+<div class="lib-arrow">-></div>
+<div class="lib-step next">阶段二：全品类扩展<br>（工程类/营销活动类/行政采购类）</div>
+<div class="lib-arrow">-></div>
+<div class="lib-step next">阶段三：动态更新机制<br>（季度更新+市场价触发更新）</div>
+</div>
+<table style="margin-top:12px">
+<thead><tr><th>要素</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><strong>库内逻辑</strong></td><td>价格在库内浮动范围内 -> 自动通过，无需人工核价</td></tr>
+<tr><td><strong>库外处理</strong></td><td>价格超出库内范围或不在库内 -> 走测算核价组人工审核</td></tr>
+<tr><td><strong>维护责任</strong></td><td>测算核价组负责价格库建设与日常维护</td></tr>
+<tr><td><strong>数据来源</strong></td><td>历史结算数据 + 市场价调研 + 供应商报价 + 区域同行数据</td></tr>
+<tr><td><strong>更新频率</strong></td><td>核心品类季度更新，非核心半年更新，异常波动即时更新</td></tr>
+</tbody></table>
+<div style="margin-top:10px;padding:10px;background:var(--green-lt);border-radius:8px;font-size:11.5px">
+<strong>预期效果：</strong>价格库覆盖后，约60-70%的核价工作量可自动通过，核价组8人可集中精力处理30-40%的复杂项和库外项。
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">2. 大区供方库建设方案</div>
+<div class="card-body">
+<div class="lib-flow">
+<div class="lib-step now">阶段一：核心品类供方库<br>（维保/保洁/绿化等在用供方梳理）</div>
+<div class="lib-arrow">-></div>
+<div class="lib-step next">阶段二：功能库建设<br>（按供方交付能力分类）</div>
+<div class="lib-arrow">-></div>
+<div class="lib-step next">阶段三：动态评估准入退出<br>（履约评估体系运营）</div>
+</div>
+<table style="margin-top:12px">
+<thead><tr><th>要素</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><strong>当前问题</strong></td><td>供方库因安全事故等原因放弃，鱼龙混杂、挂靠现象多</td></tr>
+<tr><td><strong>建设层级</strong></td><td>大区层面建库，不搞总部一刀切，也不搞各城市各自为政</td></tr>
+<tr><td><strong>分层管理</strong></td><td>保洁服务类属地化、工程维保类全国化、营销活动类属地化</td></tr>
+<tr><td><strong>维护责任</strong></td><td>采购与供方管理组负责库建设、准入评估、动态调整</td></tr>
+<tr><td><strong>与价格库联动</strong></td><td>供方库中的价格数据自动同步至价格库，双向校验</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">供方分层管理策略</div>
+<div class="card-body" style="padding:0;overflow-x:auto">
+<table>
+<thead><tr><th>供方类型</th><th>管理策略</th><th>原因分析</th><th>采购方式</th><th>管理主体</th></tr></thead>
+<tbody>
+<tr><td><strong>保洁服务类</strong></td><td><span class="tag tag-green">属地化</span></td><td>需解决属地招人问题，服务实施需本地资源</td><td>区域集采/属地采购</td><td>属地组长监督 + 采购组管理准入</td></tr>
+<tr><td><strong>工程维保类</strong><br>（电梯、空调）</td><td><span class="tag tag-blue">全国性</span></td><td>具备规模优势，品牌服务标准化程度高</td><td>战略集采（总部定标）</td><td>采购组管理合同 + 属地监督履约</td></tr>
+<tr><td><strong>营销活动类</strong></td><td><span class="tag tag-green">属地化</span></td><td>实施需本地搭建资源，外场布置需本地执行</td><td>属地采购</td><td>属地组长直接管理</td></tr>
+<tr><td><strong>石材建材类</strong></td><td><span class="tag tag-orange">混合</span></td><td>大宗可集采降本，零星采购属地灵活</td><td>区域集采+属地补采</td><td>采购组统筹 + 属地执行</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">验收分级标准</div>
+<div class="card-body">
+<div class="accept-grid">
+<div class="accept-card t1">
+<div class="accept-tier">T1 必须验收</div>
+<div class="accept-title">大型施工项目</div>
+<div class="accept-desc">10万以上工程类<br>电梯/空调/消防维保<br>隐蔽工程<br><strong>属地验收专员现场</strong><br>组长复核+影像留存</div>
+</div>
+<div class="accept-card t2">
+<div class="accept-tier">T2 抽查验收</div>
+<div class="accept-title">中型项目</div>
+<div class="accept-desc">1-10万维修/改造类<br>保洁/绿化服务验收<br>材料进场验收<br><strong>属地验收专员抽查</strong></div>
+</div>
+<div class="accept-card t3">
+<div class="accept-tier">T3 可不验收</div>
+<div class="accept-title">小型项目</div>
+<div class="accept-desc">1万以下营销推广<br>零星采购<br>日常消耗品<br><strong>资料审核即可</strong></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- S9: Review workflow -->
+<div class="section" id="sec9">
+<div class="section-header"><div class="section-num">9</div><div><div class="section-title">审核流程设计：属地2人后的管理难点</div><div class="section-subtitle">核心问题：城市公司只剩2人，审核工作怎么组织？</div></div></div>
+
+<div class="card" style="border-left:4px solid var(--orange)">
+<div class="card-body">
+<div style="font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px">管理难点分析</div>
+<div style="font-size:12px;color:var(--g700);line-height:1.9">
+当前每个城市公司有组长+若干下属，组长让下属复核后再上报。小中台化后城市公司只剩2人，验收专员聚焦现场验收，组长一个人扛属地所有成本审核+对接+结算初验。如果大区小中台还要按城市维度逐个审核属地提交的作业，工作量确实非常大。<br><br>
+<strong>核心矛盾：</strong>审核工作到底是按城市维度组织，还是按业务量/业务类型组织？
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">解决方案：按业务类型审核，非按城市审核</div>
+<div class="card-body">
+<div class="review-compare">
+<div class="review-col before">
+<h5>属地化前（按城市审核）</h5>
+<p>
+- 城市A所有事项 -> 城市A组长安排下属复核 -> 上报中台<br>
+- 中台按城市分对接人，每人盯几个城市<br>
+- 问题：中台对某城市业务全包，忙闲不均
+</p>
+</div>
+<div class="review-col after">
+<h5>属地化后（按业务类型审核）</h5>
+<p>
+- 7城验收事项 -> 各城验收专员直接处理<br>
+- 7城核价事项 -> <strong>价格库内自动通过</strong>，库外的进入测算核价组<br>
+- 7城采购/供方事项 -> 进入采购与供方管理组<br>
+- 两组按业务量分配组员，不按城市分配<br>
+- 两组组长负责整体协调和异常升级，不参与逐项审核
+</p>
+</div>
+</div>
+<div style="margin-top:14px;padding:12px;background:var(--blue-lt);border-radius:8px;font-size:12px">
+<strong>关键设计：</strong><br>
+1. <strong>价格库是第一道闸口</strong>：库内项目自动通过，不进入人工审核队列<br>
+2. <strong>属地组长做初筛</strong>：属地提交资料经组长初筛分类后，按业务类型推送至对应组<br>
+3. <strong>两组按业务量配人</strong>：核价组4个工程师按业务类型分工（如A负责维保类、B负责工程改造类），任何人都能审任何城市的件<br>
+4. <strong>两组组长角色定位</strong>：不审核具体件，负责整体进度监控、异常升级、跨组协调<br>
+5. <strong>SLA机制</strong>：核价2个工作日、结算终审5个工作日，超时自动升级
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">三级审核流程</div>
+<div class="card-body">
+<div class="flow-container">
+<div class="flow-step" style="border-left:3px solid var(--green)"><div class="flow-step-title">属地初筛</div><div class="flow-step-body">7城成本组长<br>资料完整性检查<br>分类推送至对应组</div></div>
+<div class="flow-arrow">-></div>
+<div class="flow-step" style="border-left:3px solid var(--blue)"><div class="flow-step-title">价格库自动过滤</div><div class="flow-step-body">库内项目自动通过<br>库外项目进入人工审核</div></div>
+<div class="flow-arrow">-></div>
+<div class="flow-step" style="border-left:3px solid var(--purple)"><div class="flow-step-title">大区两组审核</div><div class="flow-step-body">按业务类型分配<br>不按城市分配<br>SLA时效控制</div></div>
+<div class="flow-arrow">-></div>
+<div class="flow-step" style="border-left:3px solid var(--red)"><div class="flow-step-title">异常升级</div><div class="flow-step-body">超预算/重大变更<br>两组组长协调->大区审批<br>超时自动升级</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- S10: Advantages & Risks -->
+<div class="section" id="sec10">
+<div class="section-header"><div class="section-num">10</div><div><div class="section-title">优势与风险</div><div class="section-subtitle">全面评估试点利弊</div></div></div>
+
+<div class="adv-grid">
+<div class="adv-card pro">
+<h4>优势</h4>
+<ul>
+<li><strong>人员集中提高效率：</strong>改变工作方式，集中办公减少沟通损耗</li>
+<li><strong>验收不再受差旅费限制：</strong>验收专员常驻城市</li>
+<li><strong>供方履约监督常态化：</strong>组长+验收专员双人在场</li>
+<li><strong>专业分工更清晰：</strong>两组各司其职，采购与供方管理创造直接价值</li>
+<li><strong>价格库提效：</strong>库内自动通过，核价人力聚焦复杂项</li>
+<li><strong>数据沉淀加速：</strong>集中后数据归集更快，反哺采购决策</li>
+<li><strong>合同全周期管理：</strong>领导认同，从需求到数据反馈全链条覆盖</li>
+<li><strong>复合用工灵活：</strong>两组可互援，应对业务高峰</li>
+</ul>
+</div>
+<div class="adv-card con">
+<h4>风险</h4>
+<ul>
+<li><strong>人员集中导致离职：</strong>调至大区（上海）生活成本高</li>
+<li><strong>新招人上手慢：</strong>新人对万达体系不了解，磨合期影响效率</li>
+<li><strong>属地2人扛不住：</strong>组长一人兼审核+对接+结算初验</li>
+<li><strong>测算无法每项目到现场：</strong>大区人力有限，需分级处理</li>
+<li><strong>供方库建设滞后：</strong>功能库需时间，短期内供方管理仍处真空</li>
+<li><strong>城市公司协同摩擦：</strong>双线管理可能有冲突</li>
+<li><strong>保密风险：</strong>调整过程泄露可能引起恐慌</li>
+</ul>
+</div>
+</div>
+
+<div class="risk-grid">
+<div class="risk-card">
+<div class="risk-header"><div class="risk-level"><div class="risk-dot ah"></div><div class="risk-dot ah"></div><div class="risk-dot"></div></div><div class="risk-title">人员集中导致离职（安安重点提示）</div></div>
+<div style="font-size:10.5px"><span class="badge badge-h">可能性:高</span> <span class="badge badge-h">影响:高</span></div>
+<div class="risk-measure">1. 提前摸底个人意愿，不强制调动<br>2. 已在上海/杭州等城市的尽量不动<br>3. 提供过渡期补贴或异地津贴<br>4. 非上海籍人员可考虑安排在杭州/南京等成本较低城市集中<br>5. 留出1-2个月交接期，新人跟岗学习<br>6. 核心岗位（组长）优先保留，验收专员可适度新招</div>
+</div>
+<div class="risk-card">
+<div class="risk-header"><div class="risk-level"><div class="risk-dot ah"></div><div class="risk-dot am"></div><div class="risk-dot"></div></div><div class="risk-title">新招人不了解万达体系</div></div>
+<div style="font-size:10.5px"><span class="badge badge-h">可能性:高</span> <span class="badge badge-m">影响:中</span></div>
+<div class="risk-measure">1. 编制万达成本管理SOP手册<br>2. 新人跟岗2周，由组长带教<br>3. 验收专员优先内部转岗<br>4. 价格库降低新人核价门槛<br>5. 首月只安排T3级验收，逐步提升</div>
+</div>
+<div class="risk-card">
+<div class="risk-header"><div class="risk-level"><div class="risk-dot ah"></div><div class="risk-dot am"></div><div class="risk-dot"></div></div><div class="risk-title">小中台审核压力过大（安安重点提示）</div></div>
+<div style="font-size:10.5px"><span class="badge badge-h">可能性:高</span> <span class="badge badge-m">影响:中</span></div>
+<div class="risk-measure">1. 两组组长不审核具体件，只管异常和协调<br>2. 审核按业务类型分配，不按城市分<br>3. 价格库自动过滤60-70%核价件<br>4. SLA超时自动升级，组长只看异常报表<br>5. 两组组员承担日常审核管理</div>
+</div>
+<div class="risk-card">
+<div class="risk-header"><div class="risk-level"><div class="risk-dot am"></div><div class="risk-dot am"></div><div class="risk-dot"></div></div><div class="risk-title">测算无法每项目到现场</div></div>
+<div style="font-size:10.5px"><span class="badge badge-m">可能性:中</span> <span class="badge badge-h">影响:高</span></div>
+<div class="risk-measure">1. 分级勘察：简单项目属地记录、中等远程复核、复杂大区派人<br>2. 价格库覆盖项目无需现场<br>3. 属地验收专员负责影像记录<br>4. 大额项目（10万+）大区必须派人</div>
+</div>
+<div class="risk-card">
+<div class="risk-header"><div class="risk-level"><div class="risk-dot am"></div><div class="risk-dot am"></div><div class="risk-dot"></div></div><div class="risk-title">属地组长一人扛不住</div></div>
+<div style="font-size:10.5px"><span class="badge badge-m">可能性:中</span> <span class="badge badge-h">影响:高</span></div>
+<div class="risk-measure">1. 验收专员分担现场工作<br>2. 价格库减少核价件数<br>3. 结算初验可线上提交<br>4. 高峰期小中台下沉支援<br>5. 属地不做复杂核价，上收大区</div>
+</div>
+<div class="risk-card">
+<div class="risk-header"><div class="risk-level"><div class="risk-dot am"></div><div class="risk-dot am"></div><div class="risk-dot"></div></div><div class="risk-title">供方功能库建设滞后</div></div>
+<div style="font-size:10.5px"><span class="badge badge-m">可能性:中</span> <span class="badge badge-m">影响:中</span></div>
+<div class="risk-measure">分阶段建设；采购组专人负责；涂峰总明确需时间推进</div>
+</div>
+<div class="risk-card">
+<div class="risk-header"><div class="risk-level"><div class="risk-dot al"></div><div class="risk-dot al"></div><div class="risk-dot"></div></div><div class="risk-title">过渡期业务中断</div></div>
+<div style="font-size:10.5px"><span class="badge badge-l">可能性:低</span> <span class="badge badge-h">影响:高</span></div>
+<div class="risk-measure">新老流程并行2周；分批到岗；大区保留备份能力</div>
+</div>
+</div>
+</div>
+
+<!-- S11: Timeline -->
+<div class="section" id="sec11">
+<div class="section-header"><div class="section-num">11</div><div><div class="section-title">试点推进路径</div><div class="section-subtitle">节后与涂峰总对接 保密推进</div></div></div>
+
+<div class="card">
+<div class="card-body">
+<div class="timeline">
+<div class="timeline-phase timeline-phase-1">
+<div class="timeline-dot">P1</div>
+<div class="timeline-title">夯基</div>
+<div class="timeline-sub">节后第1-2周</div>
+<ul class="timeline-items">
+<li>与涂峰总对接方案</li>
+<li>确认7城组长+验收专员人选</li>
+<li>个人意愿摸底（谁愿意集中）</li>
+<li>价格库建设启动（核心品类）</li>
+<li>供方库梳理启动（在用供方）</li>
+<li>验收分级标准制定</li>
+<li>测算分级勘察机制制定</li>
+<li>重复招投标数据开始积累</li>
+</ul>
+</div>
+<div class="timeline-phase timeline-phase-2">
+<div class="timeline-dot">P2</div>
+<div class="timeline-title">试点</div>
+<div class="timeline-sub">第3-6周</div>
+<ul class="timeline-items">
+<li>7城属地人员到岗</li>
+<li>小中台两组组建完成</li>
+<li>价格库初版上线试跑</li>
+<li>验收分级标准试运行</li>
+<li>测算分级勘察试运行</li>
+<li>供方分层管理试跑</li>
+<li>审核流程新机制测试</li>
+</ul>
+</div>
+<div class="timeline-phase timeline-phase-3">
+<div class="timeline-dot">P3</div>
+<div class="timeline-title">固化</div>
+<div class="timeline-sub">第7-12周</div>
+<ul class="timeline-items">
+<li>流程优化与标准固化</li>
+<li>价格库扩展至全品类</li>
+<li>供方功能库初步建成</li>
+<li>成本数据库建立</li>
+<li>合同全周期管理落地</li>
+<li>试点效果评估</li>
+<li>形成可复制方案</li>
+<li>向涂峰总汇报成果</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card" style="border-left:4px solid var(--navy)">
+<div class="card-body">
+<div style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:6px">涂峰总布置的待办事项</div>
+<div style="font-size:12px;color:var(--g700);line-height:2">
+<strong>1. 架构调整思考（涂登芦负责）：</strong>按创造价值、工作与价值关系、工作排布、岗位设计的逻辑，重新整理测算核价、采购管理和验收结算工作方向，节后与涂峰总核对<br>
+<strong>2. 数据与案例积累（涂登芦负责）：</strong>收集整理重复招投标等相关数据和案例<br>
+<strong>3. 智慧商业情况反馈（涂登芦负责）：</strong>询问肖波智慧商业营运情况，反馈涂峰总<br>
+<strong>4. 纪要发放：</strong>将降本方案会议纪要发给工区同事学习
+</div>
+</div>
+</div>
+</div>
+
+<div class="section" style="padding-bottom:48px">
+<div style="font-size:11px;color:var(--g600);line-height:2">
+<strong>内部依据：</strong>涂峰总专项沟通会议纪要（2026年6月17日） 成本管理组织架构调整规划会议纪要（2026年6月17日）<br>
+<strong>外部参考：</strong>
+<a href="https://m.toutiao.com/group/7621815669624947254/" target="_blank" style="color:var(--navy-lt)">商业地产采购工程师实践</a>
+<a href="https://www.zhemaiyun.com/news/2010808359019769856" target="_blank" style="color:var(--navy-lt)">房地产工程供方管理体系</a>
+<a href="https://www.docin.com/touch_new/preview_new.do?id=4936041727" target="_blank" style="color:var(--navy-lt)">物业供方管理规范</a>
+<a href="https://www.mohurd.gov.cn/xinwen/dfxx/art/2025/art_ec4607ff4f25475aa45b88af395c4723.html" target="_blank" style="color:var(--navy-lt)">物业服务履约评估体系</a>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+var secs=document.querySelectorAll('.section'),nls=document.querySelectorAll('.sidebar-nav a');
+var mainEl=document.querySelector('.main');
+window.addEventListener('scroll',function(){var c='';secs.forEach(function(s){if(pageYOffset>=s.offsetTop-70)c=s.id});nls.forEach(function(l){l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})});
+nls.forEach(function(l){l.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(l.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+</body>
+</html>
