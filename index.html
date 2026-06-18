@@ -1300,11 +1300,16 @@ document.addEventListener('input',function(e){
   document.getElementById('rteValignMiddle').addEventListener('mousedown',function(e){
     e.preventDefault();
     if(!activeEl) return;
+    var table=activeEl.closest('table');
+    var cells;
+    if(table){
+      cells=table.querySelectorAll('td,th');
+    }else{
+      cells=[activeEl];
+    }
     var isMiddle=activeEl.style.verticalAlign==='middle';
     var val=isMiddle?'top':'middle';
-    activeEl.style.verticalAlign=val;
-    var ch=activeEl.querySelectorAll('*');
-    for(var i=0;i<ch.length;i++){ch[i].style.verticalAlign=val}
+    for(var i=0;i<cells.length;i++){cells[i].style.verticalAlign=val}
     triggerSave();
   });
   document.getElementById('rteColor').addEventListener('mousedown',function(e){suppressHide=true});
@@ -1321,6 +1326,7 @@ document.addEventListener('input',function(e){
     setTimeout(function(){
       var ae=document.activeElement;
       if(suppressHide) return;
+      if(ae&&ae.hasAttribute&&ae.hasAttribute('contenteditable')) return;
       if(!ae||!ae.closest||(!ae.closest('#rteToolbar')&&!ae.closest('.rte-color'))){hide()}
     },200);
   });
