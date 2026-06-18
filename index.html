@@ -1173,20 +1173,24 @@ document.addEventListener('input',function(e){
   var activeEl=null;
   var curSize=14;
   var suppressHide=false;
+  var wasVisible=false;
 
   function show(el){
     activeEl=el;
     var cs=window.getComputedStyle(el);
     curSize=parseFloat(cs.fontSize)||14;
     sizeLabel.textContent=Math.round(curSize);
-    var rect=el.getBoundingClientRect();
-    var top=rect.top-44;
-    if(top<5) top=rect.bottom+6;
-    var left=rect.left;
-    if(left+360>window.innerWidth) left=window.innerWidth-370;
-    if(left<5) left=5;
-    toolbar.style.top=top+'px';
-    toolbar.style.left=left+'px';
+    if(!wasVisible){
+      var rect=el.getBoundingClientRect();
+      var top=rect.top-44;
+      if(top<5) top=rect.bottom+6;
+      var left=rect.left;
+      if(left+360>window.innerWidth) left=window.innerWidth-370;
+      if(left<5) left=5;
+      toolbar.style.top=top+'px';
+      toolbar.style.left=left+'px';
+    }
+    wasVisible=true;
     toolbar.classList.add('show');
   }
 
@@ -1221,6 +1225,7 @@ document.addEventListener('input',function(e){
   function hide(){
     if(suppressHide) return;
     toolbar.classList.remove('show');
+    wasVisible=false;
     activeEl=null;
   }
 
